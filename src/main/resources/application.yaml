@@ -1,1 +1,3 @@
-spring.application.name=best-online-store
+spring:
+  application:
+    name: best-online-store
