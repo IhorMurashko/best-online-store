@@ -4,8 +4,10 @@ on:
   push:
     branches: [ main ]
 
+
   pull_request:
     branches: [ main ]
+
 
 jobs:
   detect-changes:
@@ -59,7 +61,9 @@ jobs:
       matrix:
         include:
           - service: user-service
+
             secret: RENDER_DEPLOY_HOOK_URL_USER_SERVICE
+
     #          - service: auth-service
     #            secret: RENDER_DEPLOY_HOOK_URL_AUTH_SERVICE
     #          - service: gateway-service
