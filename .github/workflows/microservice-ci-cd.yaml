@@ -16,7 +16,7 @@ jobs:
     outputs:
       changed_services: ${{ steps.set.outputs.changed }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - id: set
         run: |
           CHANGED=$(git diff --name-only ${{ github.event.before || github.event.pull_request.base.sha }} ${{ github.sha }})
@@ -66,7 +66,7 @@ jobs:
             secret: RENDER_DEPLOY_HOOK_URL_GATEWAY_SERVICE
     name: CD - Deploy ${{ matrix.service }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Trigger Render deploy for ${{ matrix.service }}
         if: contains(needs.detect-changes.outputs.changed_services, matrix.service)
         run: |
