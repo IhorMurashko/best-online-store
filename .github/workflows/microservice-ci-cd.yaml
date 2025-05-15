@@ -21,12 +21,12 @@ jobs:
         run: |
           CHANGED=$(git diff --name-only ${{ github.event.before || github.event.pull_request.base.sha }} ${{ github.sha }})
           SERVICES=""
-#          add new services here
           for S in auth-service user-service gateway-service; do  
             if echo "$CHANGED" | grep -q "^$S/"; then
               SERVICES="$SERVICES $S"
             fi
           done
+          # Записываем output с именем changed
           echo "changed=${SERVICES}" >> $GITHUB_OUTPUT
 
   build-and-test:
@@ -56,14 +56,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-#        add enw service with render deploy hook
         include:
-          - service: auth-service
-            secret: RENDER_DEPLOY_HOOK_URL_AUTH_SERVICE
           - service: user-service
-            secret: RENDER_DEPLOY_HOOK_URL_USER_SERVICE
-          - service: gateway-service
-            secret: RENDER_DEPLOY_HOOK_URL_GATEWAY_SERVICE
+            secret: RENDER_USER_SERVICE_DEPLOY_HOOK
+#          - service: auth-service
+#            secret: RENDER_DEPLOY_HOOK_URL_AUTH_SERVICE
+#          - service: gateway-service
+#            secret: RENDER_DEPLOY_HOOK_URL_GATEWAY_SERVICE
     name: CD - Deploy ${{ matrix.service }}
     steps:
       - uses: actions/checkout@v4
