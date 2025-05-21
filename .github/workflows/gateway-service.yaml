@@ -1,0 +1,38 @@
+name: CI/CD — gateway-service
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'gateway-service/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'gateway-service/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Build & test gateway-service
+        run: mvn clean verify -pl gateway-service -am
+
+  deploy:
+    name: Deploy gateway-service
+    needs: build
+    if: github.ref == 'refs/heads/main' && success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy for gateway-service
+        run: curl -X POST "${{ secrets.RENDER_HOOK_GATEWAY_SERVICE }}"
