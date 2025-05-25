@@ -1,6 +1,6 @@
 package com.bestStore.userService.model;
 
-import com.bestStore.userService.roles.Role;
+import com.common.lib.userModule.roles.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,14 +22,14 @@ import java.util.Set;
  * and role mapping via an ElementCollection.</p>
  *
  * <p>Designed as a MappedSuperclass for JPA, it should be extended by actual entity classes.</p>
- *
+ * <p>
  * Fields:
  * - id: unique user identifier (auto-generated)
  * - email, password: required login credentials
  * - roles: collection of user roles (as enum values)
  * - account status flags: track account state (locked, expired, etc.)
  * - createdAt, updatedAt: audit timestamps
- *
+ * <p>
  * Equality is based on user ID.
  *
  * @author Ihor Murashko

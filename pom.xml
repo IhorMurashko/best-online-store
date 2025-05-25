@@ -16,11 +16,14 @@
     <artifactId>best-online-store</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Best Online Store</name>
+
     <modules>
         <module>user-service</module>
         <module>auth-service</module>
         <module>gateway-service</module>
+        <module>common-dto</module>
     </modules>
+
     <packaging>pom</packaging>
     <description>Backend for an online store project built with Spring Boot 3.4 and Java 17.</description>
 
@@ -48,6 +51,9 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <mapstruct-processor.version>1.6.3</mapstruct-processor.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+
+        <!-- dto's -->
+        <common-dto.version>0.0.1-SNAPSHOT</common-dto.version>
 
         <!-- Security -->
         <spring-boot-starter-security.version>3.4.5</spring-boot-starter-security.version>
@@ -129,6 +135,14 @@
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
+
+            <!-- dto's -->
+            <dependency>
+                <groupId>com.beststore</groupId>
+                <artifactId>common-dto</artifactId>
+                <version>${common-dto.version}</version>
+            </dependency>
+
 
             <!-- Security -->
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
