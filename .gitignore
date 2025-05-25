@@ -1,15 +1,40 @@
 # Maven
-target/
-!.mvn/wrapper/maven-wrapper.jar
+/target/
+/.mvn/wrapper/maven-wrapper.jar
+
+# Wrapper scripts — игнорим mvnw и mvnw.cmd
+/mvnw
+/mvnw.cmd
+/service-registry/mvnw.cmd
 
 # IntelliJ
-.idea/
-*.iml
-*.iws
+/.idea/
+/*.iml
+/*.iws
 
 # Logs
 *.log
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
+movie-catalog-service/mvnw
+movie-catalog-service/.gitattributes
+/movie-catalog-service/.mvn
+movie-catalog-service/mvnw.cmd
+api-gateway/build.gradle
+/api-gateway/gradle
+api-gateway/gradlew
+api-gateway/gradlew.bat
+api-gateway/settings.gradle
+microservices-auth/.gitattributes
+/microservices-auth/.mvn
+microservices-auth/mvnw
+microservices-auth/mvnw.cmd
+service-registry/.gitattributes
+/service-registry/.mvn
+service-registry/mvnw
+test-methods-service/.gitattributes
+/test-methods-service/.mvn
+test-methods-service/mvnw
+test-methods-service/mvnw.cmd
