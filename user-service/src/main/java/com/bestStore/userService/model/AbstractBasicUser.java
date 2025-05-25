@@ -60,7 +60,8 @@ public abstract class AbstractBasicUser {
      * Unique identifier for the user. Auto-generated using a sequence strategy.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 1)
     protected Long id;
 
     /**

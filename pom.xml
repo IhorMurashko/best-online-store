@@ -40,7 +40,7 @@
         <!-- Gateway -->
         <spring-cloud-starter-gateway.version>4.2.2</spring-cloud-starter-gateway.version>
 
-        <!--        GRPC server and client  -->
+        <!-- GRPC server and client  -->
         <spring-grpc-spring-boot-starter.version>0.8.0</spring-grpc-spring-boot-starter.version>
 
         <!-- DB Migration -->
@@ -68,6 +68,7 @@
         <!-- Datasource -->
         <h2database.version>2.3.232</h2database.version>
         <spring-boot-starter-data-jpa.version>3.4.5</spring-boot-starter-data-jpa.version>
+        <postgresql.version>42.7.5</postgresql.version>
     </properties>
 
     <dependencyManagement>
@@ -136,7 +137,7 @@
                 <version>${mapstruct.version}</version>
             </dependency>
 
-            <!-- dto's -->
+            <!-- dto's common lib -->
             <dependency>
                 <groupId>com.beststore</groupId>
                 <artifactId>common-dto</artifactId>
@@ -183,6 +184,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${spring-boot-starter-data-jpa.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
