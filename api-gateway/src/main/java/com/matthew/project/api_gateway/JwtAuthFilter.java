@@ -52,7 +52,18 @@ public class JwtAuthFilter implements WebFilter {
             List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
             Authentication auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
 
-            return chain.filter(exchange)
+            System.out.println("[Gateway] Setting headers - X-User-Name: " + username + ", X-User-Role: " + role);
+
+            ServerHttpRequest modifiedRequest = exchange.getRequest()
+                    .mutate()
+                    .header("X-User-Name", username)
+                    .header("X-User-Role", role)
+                    .build();
+
+            ServerWebExchange modifiedExchange = exchange.mutate().request(modifiedRequest).build();
+
+
+            return chain.filter(modifiedExchange)
                     .contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth));
 
         } catch (Exception e) {

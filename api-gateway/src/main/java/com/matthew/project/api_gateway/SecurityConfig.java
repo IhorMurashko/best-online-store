@@ -20,7 +20,7 @@ public class SecurityConfig {
         return http
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/all/**", "/authenticate/**", "/register/user/**").permitAll()
-                        .pathMatchers("/user/**").hasAnyRole("USER")
+                        .pathMatchers("/user/**",  "/test/**").hasAnyRole("USER")
                         .pathMatchers("/admin/**").hasAnyRole("ADMIN")
                         .anyExchange().authenticated()
                 )

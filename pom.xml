@@ -21,6 +21,14 @@
         <module>auth-service</module>
         <module>gateway-service</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-netflix-eureka-server</artifactId>
+            <version>4.2.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
     <packaging>pom</packaging>
     <description>Backend for an online store project built with Spring Boot 3.4 and Java 17.</description>
 
@@ -39,6 +47,13 @@
 
         <!--        GRPC server and client  -->
         <spring-grpc-spring-boot-starter.version>0.8.0</spring-grpc-spring-boot-starter.version>
+
+        <!-- spring-cloud -->
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+
+        <!-- Jjwt -->
+        <jjwt.version>0.12.6</jjwt.version>
+
 
         <!-- DB Migration -->
         <flyway-database-postgresql.version>11.8.2</flyway-database-postgresql.version>
@@ -81,6 +96,26 @@
             </dependency>
 
 
+            <!-- JJWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+
             <!-- Open API -->
             <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
             <dependency>
@@ -114,6 +149,16 @@
                 <version>${flyway-database-postgresql.version}</version>
                 <scope>runtime</scope>
             </dependency>
+
+            <!-- Spring-Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
 
             <!-- Utils -->
             <dependency>
