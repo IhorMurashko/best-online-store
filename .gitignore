@@ -38,3 +38,7 @@ test-methods-service/.gitattributes
 /test-methods-service/.mvn
 test-methods-service/mvnw
 test-methods-service/mvnw.cmd
+api-gateway/mvnw.cmd
+api-gateway/mvnw
+api-gateway/.mvn/wrapper/maven-wrapper.properties
+api-gateway/.gitattributes

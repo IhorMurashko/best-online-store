@@ -1,4 +1,4 @@
-package com.genuinecoder.apigateway;
+package com.matthew.project.api_gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
