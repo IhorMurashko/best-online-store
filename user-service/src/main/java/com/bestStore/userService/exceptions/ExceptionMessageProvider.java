@@ -11,6 +11,6 @@ public class ExceptionMessageProvider {
     public static final String PASSWORDS_DONT_MATCH = "Passwords don't match";
     public static final String EMAIL_ALREADY_EXIST = "Email: %s already exist";
     public static final String INVALID_CREDENTIALS = "Invalid email or password.";
-
+    public static final String REQUEST_HEADER_DOES_NOT_PRESENT = "Request doesn't contains header: %s";
 
 }

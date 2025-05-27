@@ -6,12 +6,11 @@ import com.bestStore.userService.mapper.UpdatableUserInfoMapper;
 import com.bestStore.userService.mapper.UserFullInfoMapper;
 import com.bestStore.userService.model.User;
 import com.bestStore.userService.services.userCrudService.UserCrudService;
-import com.bestStore.userService.utils.UserFieldAdapter;
 import com.common.lib.userModule.userDto.request.UserUpdateRequestDto;
-import com.common.lib.userModule.userDto.response.UserFullInfoResponseDto;
-import lombok.NonNull;
+import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +24,7 @@ public class UpdatableUserInfoServiceImpl implements UpdatableUserInfoService {
 
 
     @Override
-    public UserFullInfoResponseDto updateUser(@NonNull UserUpdateRequestDto userUpdateRequestDto, long userId) {
+    public BasicUserInfoResponse updateUser(@NonNull UserUpdateRequestDto userUpdateRequestDto, @NonNull Long userId) {
 
 
         User existingUser = userCrudService.findById(userId).orElseThrow(
@@ -43,7 +42,7 @@ public class UpdatableUserInfoServiceImpl implements UpdatableUserInfoService {
     }
 
     @Override
-    public void deleteUser(long id) {
+    public void deleteUser(@NonNull Long id) {
 
         boolean userExistById = userCrudService.isUserExistById(id);
 
@@ -61,20 +60,4 @@ public class UpdatableUserInfoServiceImpl implements UpdatableUserInfoService {
 
     }
 
-    @Override
-    public void deleteUser(@NonNull String email) {
-
-        boolean userExistByEmail = userCrudService.isEmailExist(UserFieldAdapter.toLower(email));
-
-        if (userExistByEmail) {
-            log.warn("User with email {} been deleted", email);
-            userCrudService.deleteByEmail(email);
-        } else {
-            log.warn("User with email {} was not found", email);
-            throw new UserNotFoundException(
-                    String.format(ExceptionMessageProvider.USER_EMAIL_NOT_FOUND, email)
-            );
-
-        }
-    }
 }

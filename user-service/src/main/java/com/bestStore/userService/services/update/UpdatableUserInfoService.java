@@ -1,15 +1,14 @@
 package com.bestStore.userService.services.update;
 
 import com.common.lib.userModule.userDto.request.UserUpdateRequestDto;
-import com.common.lib.userModule.userDto.response.UserFullInfoResponseDto;
+import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;
 import org.springframework.lang.NonNull;
 
 public interface UpdatableUserInfoService {
 
-    UserFullInfoResponseDto updateUser(@NonNull UserUpdateRequestDto userUpdateRequestDto, long userId);
+    BasicUserInfoResponse updateUser(@NonNull UserUpdateRequestDto userUpdateRequestDto,@NonNull Long userId);
 
-    void deleteUser(long id);
+    void deleteUser(@NonNull Long id);
 
-    void deleteUser(@NonNull String email);
 
 }

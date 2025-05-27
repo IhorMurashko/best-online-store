@@ -7,7 +7,7 @@ import com.bestStore.userService.model.User;
 import com.bestStore.userService.services.userCrudService.UserCrudService;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
-import com.common.lib.userModule.exception.InvalidAuthCredentials;
+import com.common.lib.exception.InvalidAuthCredentials;
 import com.common.lib.userModule.roles.Role;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponseDto;

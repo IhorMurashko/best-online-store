@@ -1,4 +1,4 @@
-package com.common.lib.userModule.exception;
+package com.common.lib.exception;
 
 
 /**

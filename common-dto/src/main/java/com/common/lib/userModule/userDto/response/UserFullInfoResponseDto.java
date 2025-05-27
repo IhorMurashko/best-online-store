@@ -11,7 +11,7 @@ import java.util.Set;
  * DTO that contains complete user profile information.
  * Intended to be used in internal services or admin-facing APIs.
  *
- * @author Ihor MUrashko
+ * @author Ihor Murashko
  */
 public record UserFullInfoResponseDto(BasicUserInfoResponseDto basicUserInfoResponseDto, LocalDateTime createdAt,
                                       LocalDateTime updatedAt, String firstName, String lastName, String phoneNumber,
