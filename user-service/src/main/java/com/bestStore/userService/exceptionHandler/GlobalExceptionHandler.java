@@ -1,7 +1,9 @@
 package com.bestStore.userService.exceptionHandler;
 
 import com.bestStore.userService.exceptions.UserNotFoundException;
-import com.common.lib.userModule.exception.BaseExceptionResponse;
+import com.common.lib.exception.BaseExceptionResponse;
+import com.common.lib.exception.InvalidAuthCredentials;
+import com.common.lib.exception.RequestDoesNotContainsHeader;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,24 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
+    //invalid header
+    @ExceptionHandler(RequestDoesNotContainsHeader.class)
+    public ResponseEntity<BaseExceptionResponse> handleRequestDoesNotContainsHeader(RequestDoesNotContainsHeader ex) {
+        log.warn(ex.getMessage());
+
+        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null);
+    }
+
+
+    //invalid credentials
+    @ExceptionHandler(InvalidAuthCredentials.class)
+    public ResponseEntity<BaseExceptionResponse> handleInvalidAuthCredentials(InvalidAuthCredentials ex) {
+        log.warn(ex.getMessage());
+
+
+        return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), null);
+    }
+
     //  @Valid validation errors (DTO)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<BaseExceptionResponse> handleValidationError(MethodArgumentNotValidException ex) {
@@ -61,6 +81,7 @@ public class GlobalExceptionHandler {
 
         return buildResponse(HttpStatus.BAD_REQUEST, "Constraint violation", causes);
     }
+
 
     // Fallback
     @ExceptionHandler(Exception.class)
