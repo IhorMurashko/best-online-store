@@ -1,5 +1,6 @@
 package com.example.microservices_auth.webtoken;
 
+import com.example.microservices_auth.model.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -23,6 +24,7 @@ public class JwtService {
     public String generateToken(UserDetails userDetails) {
         Map<String, String> claims = new HashMap<>();
         claims.put("iss", "https://teamchallengeproject.com");
+        CustomUserDetails user = (CustomUserDetails) userDetails;
 
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -31,7 +33,7 @@ public class JwtService {
         claims.put("roles", String.join(",", roles));
         return Jwts.builder()
                 .claims(claims)
-                .subject(userDetails.getUsername())
+                .subject(user.getId().toString())
                 .issuedAt(Date.from(Instant.now()))
                 .expiration(Date.from(Instant.now().plusMillis(VALIDITY)))
                 .signWith(generateKey())
