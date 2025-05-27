@@ -1,6 +1,6 @@
 package com.bestStore.userService.model;
 
-import com.bestStore.userService.roles.Role;
+import com.common.lib.userModule.roles.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -14,17 +14,16 @@ import java.util.Set;
  *
  * <p>Extends {@link AbstractBasicUser} to include personal information such as name,
  * contact details, and address.</p>
- *
+ * <p>
  * Fields:
  * - firstName, lastName: user's full name
  * - phoneNumber: optional contact phone
  * - country, city, streetName, houseNumber, zipCode: address data
- *
+ * <p>
  * This entity is persisted in the "users" table.
  *
  * @author Ihot Murashko
  */
-
 
 
 @Entity

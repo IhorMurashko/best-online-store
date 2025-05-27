@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.beststore</groupId>
         <artifactId>best-online-store</artifactId>
@@ -50,6 +51,12 @@
                     <scope>runtime</scope>
                 </dependency>
 
+                <!-- Testing -->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-test</artifactId>
+                    <scope>test</scope>
+                </dependency>
 
             </dependencies>
 
@@ -58,6 +65,26 @@
 
         <profile>
             <id>prod</id>
+
+
+            <dependencies>
+                <!-- DB Migration -->
+                <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-database-postgresql -->
+                <dependency>
+                    <groupId>org.flywaydb</groupId>
+                    <artifactId>flyway-database-postgresql</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+
+
+                <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                </dependency>
+
+            </dependencies>
+
         </profile>
 
         <profile>
@@ -132,6 +159,15 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
+
+
+        <!-- dto's -->
+        <dependency>
+            <groupId>com.beststore</groupId>
+            <artifactId>common-dto</artifactId>
+        </dependency>
+
+
 
     </dependencies>
 
