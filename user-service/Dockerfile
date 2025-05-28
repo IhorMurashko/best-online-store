@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 # Сборка нужного модуля с зависимостями
-RUN mvn clean package -pl user-service -am -Pprod -DskipTests
+RUN mvn clean package -pl user-service -am -Pprod -DskipTests -Dmaven.test.skip=true
 
 # Финальный слой
 FROM eclipse-temurin:17-jdk-alpine
