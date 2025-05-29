@@ -23,8 +23,10 @@
     </developers>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
+        <spring-cloud.version>2024.0.1</spring-cloud.version>
+        <jjwt.version>0.12.6</jjwt.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -49,7 +51,46 @@
                     <artifactId>h2</artifactId>
                     <scope>runtime</scope>
                 </dependency>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </dependency>
 
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-jpa</artifactId>
+                </dependency>
+
+                <!-- Service Discovery -->
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+                </dependency>
+
+                <!-- JWT Implementation -->
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-api</artifactId>
+                    <version>${jjwt.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-impl</artifactId>
+                    <version>${jjwt.version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-jackson</artifactId>
+                    <version>${jjwt.version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+                
                 <!-- Testing -->
                 <dependency>
                     <groupId>org.springframework.boot</groupId>

@@ -1,5 +1,7 @@
 package com.example.microservices_auth;
 
+import com.bestStore.userService.model.AbstractBasicUser;
+import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.example.microservices_auth.model.MyUserDetailService;
 import com.example.microservices_auth.webtoken.JwtService;
 import com.example.microservices_auth.webtoken.LoginForm;
@@ -24,11 +26,11 @@ public class ContentController {
     private MyUserDetailService myUserDetailService;
 
     @PostMapping("/authenticate")
-    public String authenticateAndGetToken(@RequestBody LoginForm loginForm) {
+    public String authenticateAndGetToken(@RequestBody LoginCredentialsDto user) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginForm.username(), loginForm.password()));
+                user.email(), user.password()));
         if (authentication.isAuthenticated()){
-            return jwtService.generateToken(myUserDetailService.loadUserByUsername(loginForm.username()));
+            return jwtService.generateToken(myUserDetailService.loadUserByUsername(user.email()));
         } else {
             throw new UsernameNotFoundException("Invalid credentials");
         }

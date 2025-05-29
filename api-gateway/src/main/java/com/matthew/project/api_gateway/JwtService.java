@@ -48,6 +48,11 @@ public class JwtService {
         return claims.getSubject();
     }
 
+    public String extractId(String jwt) {
+        Claims claims = getClaims(jwt);
+        return claims.getId();
+    }
+
     public Claims getClaims(String jwt) {
         Claims claims = Jwts.parser()
                 .verifyWith(generateKey())

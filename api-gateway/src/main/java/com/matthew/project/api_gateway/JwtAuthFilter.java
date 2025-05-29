@@ -48,6 +48,7 @@ public class JwtAuthFilter implements WebFilter {
 
             String username = jwtService.extractUsername(token);
             String role = jwtService.extractRoles(token);
+            String id = jwtService.extractId(token);
 
             List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
             Authentication auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
@@ -58,6 +59,7 @@ public class JwtAuthFilter implements WebFilter {
                     .mutate()
                     .header("X-User-Name", username)
                     .header("X-User-Role", role)
+                    .header("X-User-Id", id)
                     .build();
 
             ServerWebExchange modifiedExchange = exchange.mutate().request(modifiedRequest).build();
