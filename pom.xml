@@ -33,6 +33,7 @@
         <!-- Web & Validation -->
 
         <spring-boot-starter-web.version>3.4.5</spring-boot-starter-web.version>
+        <spring-boot-starter-actuator.version>3.4.5</spring-boot-starter-actuator.version>
         <spring-boot-starter-validation.version>3.4.5</spring-boot-starter-validation.version>
         <spring-boot-starter-thymeleaf.version>3.4.5</spring-boot-starter-thymeleaf.version>
 
@@ -84,6 +85,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot-starter-web.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot-starter-actuator.version}</version>
             </dependency>
 
             <dependency>
