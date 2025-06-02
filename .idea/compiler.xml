@@ -17,6 +17,7 @@
         <module name="user-service" />
         <module name="common-dto" />
         <module name="gateway-service" />
+        <module name="notification-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -26,6 +27,7 @@
       <module name="best-online-store" options="" />
       <module name="common-dto" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
