@@ -1,0 +1,7 @@
+USER SERVICE:
+- reset password
+- get by email
+- auth logic
+- scheduled ping
+- GLOBAL EXCEPTION HANDLER ->  total ResponseExceptionProvider (method)
+
