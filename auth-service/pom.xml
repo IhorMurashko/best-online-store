@@ -38,14 +38,24 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+<<<<<<< HEAD
+=======
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
@@ -57,6 +67,7 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.38</version>
 		</dependency>
+>>>>>>> main
 
 		<!-- Service Discovery -->
 		<dependency>
@@ -115,6 +126,8 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+<<<<<<< HEAD
+=======
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -124,6 +137,7 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+>>>>>>> main
     </dependencies>
 
 	<!-- ========== DEPENDENCY MANAGEMENT ========== -->

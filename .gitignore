@@ -15,3 +15,15 @@ target/
 # OS
 .DS_Store
 Thumbs.db
+*.xml
+*.xml
+api-gateway/.gitattributes
+*.properties
+api-gateway/mvnw
+*.cmd
+*.md
+microservices-auth/mvnw
+service-registry/.gitattributes
+service-registry/mvnw
+test-methods-service/.gitattributes
+test-methods-service/mvnw

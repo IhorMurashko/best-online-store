@@ -1,36 +1,20 @@
-package com.example.microservices_auth.webtoken;
+package com.matthew.project.api_gateway;
 
-<<<<<<< HEAD
-import com.example.microservices_auth.model.CustomUserDetails;
-=======
-import com.common.lib.authModule.authDto.BasicUserAuthenticationResponseDto;
->>>>>>> main
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-<<<<<<< HEAD
-import java.security.Key;
-=======
->>>>>>> main
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-<<<<<<< HEAD
-=======
-/*
-Generates a JWT token for the authenticated user.
-Includes user ID, roles, and standard claims like issuer, subject, issued time, and expiration.
-The token is valid for 30 minutes and signed using a secret key.
-*/
-
->>>>>>> main
 @Service
 public class JwtService {
 
@@ -38,46 +22,23 @@ public class JwtService {
     private static final long VALIDITY = TimeUnit.MINUTES.toMillis(30);
 
     public String generateToken(UserDetails userDetails) {
-        Map<String, String> claims = new HashMap<>();
-<<<<<<< HEAD
+        Map<String, Object> claims = new HashMap<>();
         claims.put("iss", "https://teamchallengeproject.com");
-        CustomUserDetails user = (CustomUserDetails) userDetails;
-
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
-        claims.put("roles", String.join(",", roles));
-        return Jwts.builder()
-                .claims(claims)
-                .subject(user.getId().toString())
-=======
-        claims.put("iss", "https://teamchallengeproject-bestonlinestore.com");
-        BasicUserAuthenticationResponseDto user = new BasicUserAuthenticationResponseDto(userDetails);
-        Long userId = user.getId();
-        claims.put("userId", userId.toString());
-
-        List<String> roles = userDetails.getAuthorities()
+        claims.put("roles", userDetails.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-        claims.put("roles", String.join(",", roles));
+                .collect(Collectors.toList()));
 
         return Jwts.builder()
                 .claims(claims)
                 .subject(userDetails.getUsername())
->>>>>>> main
                 .issuedAt(Date.from(Instant.now()))
                 .expiration(Date.from(Instant.now().plusMillis(VALIDITY)))
                 .signWith(generateKey())
                 .compact();
     }
 
-<<<<<<< HEAD
     private SecretKey generateKey(){
-=======
-    private SecretKey generateKey() {
->>>>>>> main
         byte[] decodedKey = Base64.getDecoder().decode(SECRET);
         return Keys.hmacShaKeyFor(decodedKey);
     }
@@ -87,13 +48,24 @@ public class JwtService {
         return claims.getSubject();
     }
 
-    private Claims getClaims(String jwt) {
+    public String extractId(String jwt) {
+        Claims claims = getClaims(jwt);
+        return claims.getId();
+    }
+
+    public Claims getClaims(String jwt) {
         Claims claims = Jwts.parser()
                 .verifyWith(generateKey())
                 .build()
                 .parseSignedClaims(jwt)
                 .getPayload();
         return claims;
+    }
+
+    public String extractRoles(String jwt) {
+        Claims claims = getClaims(jwt);
+        String rolesObject = claims.get("roles").toString();
+        return rolesObject;
     }
 
     public boolean isTokenValid(String jwt) {
