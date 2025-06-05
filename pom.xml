@@ -23,6 +23,7 @@
         <module>gateway-service</module>
         <module>common-dto</module>
         <module>notification-service</module>
+        <module>user-cart-service</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -75,6 +76,9 @@
 
         <!-- Mail -->
         <spring-boot-starter-mail.version>3.4.5</spring-boot-starter-mail.version>
+
+        <!-- Cache -->
+        <spring-boot-starter-data-redis.redis>3.4.5</spring-boot-starter-data-redis.redis>
     </properties>
 
     <dependencyManagement>
@@ -227,6 +231,13 @@
                 <version>${spring-boot-starter-mail.version}</version>
             </dependency>
 
+            <!-- Cache -->
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-starter-data-redis.redis}</version>
+            </dependency>
 
         </dependencies>
 

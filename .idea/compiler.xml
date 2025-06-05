@@ -16,6 +16,7 @@
         <module name="auth-service" />
         <module name="user-service" />
         <module name="common-dto" />
+        <module name="user-cart-service" />
         <module name="gateway-service" />
         <module name="notification-service" />
       </profile>
@@ -28,6 +29,7 @@
       <module name="common-dto" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />
+      <module name="user-cart-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
