@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 # Сборка нужного модуля с зависимостями
-RUN mvn clean package -pl gateway-service -am -DskipTests
+RUN mvn clean package -pl notification-service -am -Pprod -DskipTests -Dmaven.test.skip=true
 
 # Финальный слой
 FROM eclipse-temurin:17-jdk-alpine
@@ -15,8 +15,9 @@ FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
 # Копируем собранный JAR из builder
-COPY --from=builder /app/gateway-service/target/*.jar app.jar
+COPY --from=builder /app/notification-service/target/*.jar app.jar
 
+ENV SPRING_PROFILES_ACTIVE=prod
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

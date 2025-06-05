@@ -10,6 +10,8 @@ target/
 # Logs
 *.log
 
+.env
+
 # OS
 .DS_Store
 Thumbs.db

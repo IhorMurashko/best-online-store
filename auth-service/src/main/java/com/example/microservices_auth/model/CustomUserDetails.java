@@ -1,11 +1,23 @@
 package com.example.microservices_auth.model;
 
+<<<<<<< HEAD
+=======
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+>>>>>>> main
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+@Getter
+@Setter
+@NoArgsConstructor
+>>>>>>> main
 public class CustomUserDetails implements UserDetails {
     private Long id;
     private String username;
@@ -19,6 +31,7 @@ public class CustomUserDetails implements UserDetails {
         this.authorities = authorities;
     }
 
+<<<<<<< HEAD
     public Long getId() {
         return id;
     }
@@ -33,6 +46,8 @@ public class CustomUserDetails implements UserDetails {
         return password;
     }
 
+=======
+>>>>>>> main
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
