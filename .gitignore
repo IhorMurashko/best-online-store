@@ -27,3 +27,5 @@ service-registry/.gitattributes
 service-registry/mvnw
 test-methods-service/.gitattributes
 test-methods-service/mvnw
+/.idea
+.idea/misc.xml

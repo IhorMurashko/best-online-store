@@ -27,8 +27,7 @@ public class UserCrudServiceImpl implements UserCrudService {
 
         log.info("Find user by email: {}", email);
 
-        return userRepository.findByEmail(
-                UserFieldAdapter.toLower(email));
+        return userRepository.findByEmail(email.toLowerCase());
     }
 
     @Override
@@ -78,7 +77,7 @@ public class UserCrudServiceImpl implements UserCrudService {
     @Override
     public boolean isEmailExist(@NonNull String email) {
         log.info("Check if user with email: {} exists", email);
-        return userRepository.existsByEmail(email);
+        return userRepository.existsByEmail(email.toLowerCase());
     }
 
     @Override

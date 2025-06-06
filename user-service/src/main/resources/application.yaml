@@ -4,11 +4,3 @@ server:
 spring:
   application:
     name: user-service
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always

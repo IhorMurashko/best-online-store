@@ -1,5 +1,6 @@
 package com.bestStore.userService.services.auth;
 
+import com.common.lib.authModule.authDto.BasicUserAuthenticationResponseDto;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.userModule.roles.Role;
@@ -16,5 +17,6 @@ public interface AuthService {
 
     BasicUserInfoResponse getCurrentUserInfo(long userId);
 
+    BasicUserAuthenticationResponseDto getCurrentUserInfo(String email);
 
 }

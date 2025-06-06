@@ -4,6 +4,8 @@ package com.bestStore.userService.controllers;
 import com.bestStore.userService.exceptions.ExceptionMessageProvider;
 import com.bestStore.userService.services.auth.AuthService;
 import com.bestStore.userService.services.update.UpdatableUserInfoService;
+import com.bestStore.userService.services.userCrudService.UserCrudServiceImpl;
+import com.common.lib.authModule.authDto.BasicUserAuthenticationResponseDto;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.RequestDoesNotContainsHeader;
@@ -45,6 +47,7 @@ public class AuthUserController {
 
     private final UpdatableUserInfoService updatableUserInfoService;
 
+    private final UserCrudServiceImpl userCrudService;
 
     @Operation(
             summary = "REGISTRATION (NOT FOR FRONTEND)",
@@ -84,6 +87,7 @@ public class AuthUserController {
                     schema = @Schema(implementation = UserFullInfoResponseDto.class)
             )
     )
+
 
     @PostMapping("get")
     public ResponseEntity<BasicUserInfoResponse> login(
@@ -133,6 +137,30 @@ public class AuthUserController {
 
         return ResponseEntity.ok(currentUserInfo);
 
+    }
+
+    @GetMapping("/get-by-email")
+    public ResponseEntity<BasicUserAuthenticationResponseDto> getUserByEmail(
+            @Parameter(
+                    description = "get current user by his Email in the header."
+            )
+
+            @RequestHeader(value = HeadersProvider.USER_EMAIL_HEADER_NAME) String userEmail
+    ) {
+
+        if (userEmail == null) {
+            throw new RequestDoesNotContainsHeader(
+                    String.format(
+                            ExceptionMessageProvider.REQUEST_HEADER_DOES_NOT_PRESENT,
+                            HeadersProvider.USER_EMAIL_HEADER_NAME
+                    )
+            );
+        }
+
+        BasicUserAuthenticationResponseDto currentUserInfo
+                = authService.getCurrentUserInfo(userEmail);
+
+        return ResponseEntity.ok(currentUserInfo);
     }
 
 
