@@ -79,6 +79,7 @@
 
         <!-- Cache -->
         <spring-boot-starter-data-redis.redis>3.4.5</spring-boot-starter-data-redis.redis>
+        <caffeine.version>3.2.0</caffeine.version>
     </properties>
 
     <dependencyManagement>
@@ -238,6 +239,14 @@
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring-boot-starter-data-redis.redis}</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeine -->
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+
 
         </dependencies>
 

@@ -11,17 +11,16 @@ public interface CartService {
 
     Cart save(@NonNull Cart cart);
 
-    Cart addItemToTheCart(@NonNull Long userId, @NonNull Set<ItemDto> itemDtos);
+    Set<ItemDto> addItemToTheCart(@NonNull Long userId, @NonNull ItemDto itemDto);
 
-    Cart removeItemFromTheCart(@NonNull Long userId, @NonNull ItemDto itemDto);
+    Set<ItemDto> removeItemFromTheCart(@NonNull Long userId, @NonNull Long itemId);
 
-    Cart clearTheCart(@NonNull Long userId);
+    void clearTheCart(@NonNull Long userId);
 
-    Optional<Cart> getCartByCartId(@NonNull Long cartId);
-
+    Optional<Cart> findCartByCartId(@NonNull Long cartId);
     Optional<Cart> findCartByUserId(@NonNull Long userId);
 
-    void removeCartByCartId(@NonNull Long cartId);
 
-    void removeCartByUserId(@NonNull Long userId);
+    Set<ItemDto> getCartItemsByUserId(@NonNull Long userId);
+
 }

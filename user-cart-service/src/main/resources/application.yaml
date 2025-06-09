@@ -5,6 +5,10 @@ spring:
     name: cart-service
   profiles:
     active: dev
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500, expireAfterWrite=15m
 management:
   endpoints:
     web:

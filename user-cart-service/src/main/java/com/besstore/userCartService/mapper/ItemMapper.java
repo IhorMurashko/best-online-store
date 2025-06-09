@@ -3,10 +3,7 @@ package com.besstore.userCartService.mapper;
 import com.besstore.userCartService.model.item.Item;
 import com.besstore.userCartService.utils.FieldAdapter;
 import com.common.lib.cartModule.itemDto.ItemDto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
@@ -18,5 +15,7 @@ public interface ItemMapper extends BaseMapper<Item, ItemDto> {
     @Mapping(target = "priceSnapshot", source = "priceSnapshot", qualifiedByName = "priceAdapter")
     Item toEntity(ItemDto itemDto);
 
+    @Mapping(target = "priceSnapshot", source = "priceSnapshot", qualifiedByName = "priceAdapter")
+    void updateEntityFromDto(ItemDto itemDto, @MappingTarget Item item);
 
 }

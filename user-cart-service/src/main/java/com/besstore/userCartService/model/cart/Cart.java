@@ -1,10 +1,7 @@
 package com.besstore.userCartService.model.cart;
 
 import com.besstore.userCartService.model.item.Item;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,15 +14,22 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Cart extends AbstractBaseCartModel {
+public class Cart {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_seq_generator")
+    @SequenceGenerator(name = "cart_seq_generator", sequenceName = "cart_seq", allocationSize = 1)
+    protected Long id;
+
+    @Column(nullable = false)
+    protected Long userId;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Item> items = new HashSet<>();
 
 
-    public Cart(Long userId, Set<Item> items) {
-        super(userId);
-        this.items = items;
+    public Cart(Long userId) {
+        this.userId = userId;
     }
 }

@@ -8,7 +8,7 @@ public record ItemDto(
         Long productId,
         @NonNull
         @Positive
-        Integer quantity,
+        Short quantity,
         @NonNull
         String priceSnapshot
 ) {

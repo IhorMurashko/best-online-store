@@ -10,5 +10,6 @@ import java.util.Set;
 public interface ItemRepo extends JpaRepository<Item, Long> {
 
 
-    Set<Item> getItemByCartId(Long cartId);
+    Set<Item> getItemsByCartId(Long cartId);
+
 }
