@@ -1,6 +1,7 @@
 package com.common.lib.authModule.authDto;
 
 import org.springframework.lang.NonNull;
+
 /**
  * DTO used for login requests.
  * Contains email and password.
@@ -13,7 +14,7 @@ public record LoginCredentialsDto(
 
         @NonNull
         String password
-
-) {
-
+)
+{
 }
+

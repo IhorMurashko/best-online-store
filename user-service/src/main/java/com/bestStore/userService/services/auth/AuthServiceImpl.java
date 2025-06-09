@@ -6,6 +6,7 @@ import com.bestStore.userService.mapper.UserFullInfoMapper;
 import com.bestStore.userService.model.User;
 import com.bestStore.userService.services.userCrudService.UserCrudService;
 import com.bestStore.userService.utils.UserFieldAdapter;
+import com.common.lib.authModule.authDto.BasicUserAuthenticationResponseDto;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.InvalidAuthCredentials;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -35,26 +37,26 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean registration(@NonNull RegistrationCredentialsDto registrationCredentials, Set<Role> roles) {
 
-        if (!registrationCredentials.password()
-                .equals(registrationCredentials.confirmationPassword())) {
-            log.error("Passwords do not match");
+//        if (!registrationCredentials.password()
+//                .equals(registrationCredentials.confirmationPassword())) {
+//            log.error("Passwords do not match");
+//
+//            throw new InvalidAuthCredentials(String.format(
+//                    ExceptionMessageProvider.PASSWORDS_DONT_MATCH));
+//        }
 
-            throw new InvalidAuthCredentials(String.format(
-                    ExceptionMessageProvider.PASSWORDS_DONT_MATCH));
-        }
+//        String email = UserFieldAdapter.toLower(registrationCredentials.email());
 
-        String email = UserFieldAdapter.toLower(registrationCredentials.email());
-
-        if (userCrudService.isEmailExist(email)) {
+        if (userCrudService.isEmailExist(registrationCredentials.email())) {
             log.error("Email already exist");
             throw new InvalidAuthCredentials(String.format(
-                    ExceptionMessageProvider.EMAIL_ALREADY_EXIST, email
+                    ExceptionMessageProvider.EMAIL_ALREADY_EXIST, registrationCredentials.email()
             ));
         }
 
         User user = new User(
-                email,
-                passwordEncoder.encode(registrationCredentials.password()),
+                registrationCredentials.email(),
+                registrationCredentials.password(),
                 true, true, true, true,
                 roles
         );
@@ -102,5 +104,16 @@ public class AuthServiceImpl implements AuthService {
 
         return userFullInfoMapper.toDto(user);
 
+    }
+
+    @Override
+    public BasicUserAuthenticationResponseDto getCurrentUserInfo(String email) {
+
+        User user = userCrudService.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException(String.format(
+                        ExceptionMessageProvider.USER_EMAIL_NOT_FOUND, email
+                )));
+
+        return new BasicUserAuthenticationResponseDto(user.getId(), user.getEmail(), user.getPassword(), user.getRoles());
     }
 }
