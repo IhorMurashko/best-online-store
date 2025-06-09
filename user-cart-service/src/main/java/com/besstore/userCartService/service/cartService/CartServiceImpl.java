@@ -21,6 +21,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Implementation of the CartService interface.
+ * Provides functionality for managing user shopping carts, including adding, removing,
+ * and retrieving cart items. Uses caching to improve performance for frequently accessed carts.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -29,14 +34,28 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final ItemMapper itemMapper;
 
+    /**
+     * Saves a cart to the database.
+     *
+     * @param cart the cart to save
+     * @return the saved cart
+     */
     @Transactional(propagation = Propagation.SUPPORTS)
-    @Override
-    public Cart save(@NonNull Cart cart) {
+    protected Cart save(@NonNull Cart cart) {
         return cartRepository.save(cart);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * If the cart doesn't exist for the user, a new one is created.
+     * If the item already exists in the cart, its quantity is updated.
+     * Otherwise, a new item is added to the cart.
+     * The cart cache is evicted to ensure fresh data on subsequent requests.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
+    @CacheEvict(value = "cart", key = "#userId")
     public Set<ItemDto> addItemToTheCart(@NonNull Long userId, @NonNull ItemDto itemDto) {
 
         Cart cart = findCartByUserId(userId)
@@ -67,6 +86,12 @@ public class CartServiceImpl implements CartService {
         return itemMapper.toDtoSet(cart.getItems());
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Removes the item with the specified product ID from the user's cart.
+     * The cart cache is evicted to ensure fresh data on subsequent requests.
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     @CacheEvict(value = "cart", key = "#userId")
@@ -74,8 +99,10 @@ public class CartServiceImpl implements CartService {
 
         Cart cart = getCart(userId);
 
-        cart.getItems()
-                .removeIf(item -> Objects.equals(item.getProductId(), productId));
+        cart.getItems().stream()
+                .filter(item -> Objects.equals(item.getProductId(), productId))
+                .findFirst()
+                .ifPresent(item -> cart.getItems().remove(item));
 
         log.info("removed item: {}  from the cart: {}", productId, userId);
 
@@ -85,7 +112,12 @@ public class CartServiceImpl implements CartService {
         return itemMapper.toDtoSet(cart.getItems());
     }
 
-
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Removes all items from the user's cart.
+     * The cart cache is evicted to ensure fresh data on subsequent requests.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     @CacheEvict(value = "cart", key = "#userId")
@@ -96,16 +128,28 @@ public class CartServiceImpl implements CartService {
         save(cart);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Cart> findCartByCartId(@NonNull Long cartId) {
         return cartRepository.findById(cartId);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Cart> findCartByUserId(@NonNull Long userId) {
         return cartRepository.findCartByUserId(userId);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Results are cached to improve performance for frequently accessed carts.
+     * If the cart is not found, an empty set is returned.
+     */
     @Override
     @Cacheable(value = "cart", key = "#userId")
     public Set<ItemDto> getCartItemsByUserId(@NonNull Long userId) {
@@ -116,10 +160,16 @@ public class CartServiceImpl implements CartService {
             log.warn(ex.getMessage());
             return Collections.emptySet();
         }
-
     }
 
-
+    /**
+     * Helper method to get a cart by user ID.
+     * Throws UserCartNotFoundException if the cart is not found.
+     *
+     * @param userId the ID of the user whose cart to retrieve
+     * @return the user's cart
+     * @throws UserCartNotFoundException if the cart is not found
+     */
     private Cart getCart(Long userId) {
         Optional<Cart> cartByUserId = cartRepository.findCartByUserId(userId);
         if (cartByUserId.isPresent()) {

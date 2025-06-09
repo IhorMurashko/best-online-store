@@ -49,21 +49,34 @@ class CartServiceImplTest {
 
     private long userId;
     private long productId;
-    private short quantity;
-    private BigDecimal priceSnapshot;
-    private Item item;
-    private ItemDto itemDto;
+    private short existingQuantity;
+    private short newQuantity;
+    private BigDecimal existingPriceSnapshot;
+    private BigDecimal newPriceSnapshot;
+    private Item itemWithNewQuantity;
+    private Item existingItem;
+    private ItemDto newItemDto;
+    private ItemDto existingItemDto;
+    private Cart cart;
+    private String imageUrl;
 
     @BeforeEach
     void setUp() {
-        userId = 1L;
-        productId = 1L;
-        quantity = 4;
-        priceSnapshot = new BigDecimal("10.00");
+        this.userId = 1L;
+        this.productId = 1L;
+        this.existingQuantity = 4;
+        this.newQuantity = 40;
+        this.existingPriceSnapshot = new BigDecimal("10.00");
+        this.newPriceSnapshot = new BigDecimal("20.00");
 
-        item = new Item(productId, quantity, priceSnapshot);
+        this.existingItem = new Item(productId, existingQuantity, existingPriceSnapshot);
+        this.itemWithNewQuantity = new Item(productId, newQuantity, existingPriceSnapshot);
 
-        itemDto = new ItemDto(productId, quantity, String.valueOf(priceSnapshot));
+        this.newItemDto = new ItemDto(productId, imageUrl, newQuantity, String.valueOf(existingPriceSnapshot));
+        this.existingItemDto = new ItemDto(productId, imageUrl, existingQuantity, String.valueOf(existingPriceSnapshot));
+
+        this.cart = new Cart(userId);
+        this.imageUrl = String.valueOf("image-url");
     }
 
 
@@ -73,22 +86,22 @@ class CartServiceImplTest {
         //given
 
         doReturn(Optional.empty()).when(cartRepository).findCartByUserId(userId);
-        doReturn(item).when(itemMapper).toEntity(any(ItemDto.class));
+        doReturn(itemWithNewQuantity).when(itemMapper).toEntity(any(ItemDto.class));
 
         doAnswer(invocation -> invocation.getArgument(0)).when(cartRepository).save(any(Cart.class));
 
-        Set<ItemDto> itemDtoSet = Set.of(itemDto);
+        Set<ItemDto> itemDtoSet = Set.of(newItemDto);
         doReturn(itemDtoSet).when(itemMapper).toDtoSet(anySet());
 
 
         //when
-        Set<ItemDto> resultSet = cartService.addItemToTheCart(userId, itemDto);
+        Set<ItemDto> resultSet = cartService.addItemToTheCart(userId, newItemDto);
 
 
         //then
         assertNotNull(resultSet);
         assertEquals(1, resultSet.size());
-        assertTrue(resultSet.contains(itemDto));
+        assertTrue(resultSet.contains(newItemDto));
 
 
         //verify
@@ -101,18 +114,53 @@ class CartServiceImplTest {
         verify(cartRepository).findCartByUserId(userIdArgumentCaptor.capture());
         assertEquals(userId, userIdArgumentCaptor.getValue().longValue());
         verify(itemMapper).toEntity(itemDtoArgumentCaptor.capture());
-        assertEquals(itemDto, itemDtoArgumentCaptor.getValue());
+        assertEquals(newItemDto, itemDtoArgumentCaptor.getValue());
         verify(cartRepository).save(cartArgumentCaptor.capture());
-        assertEquals(item, cartArgumentCaptor.getValue().getItems().iterator().next());
+        assertEquals(itemWithNewQuantity, cartArgumentCaptor.getValue().getItems().iterator().next());
         verify(itemMapper).toDtoSet(itemSetArgumentCaptor.capture());
-        assertEquals(item, itemSetArgumentCaptor.getValue().iterator().next());
+        assertEquals(itemWithNewQuantity, itemSetArgumentCaptor.getValue().iterator().next());
 
         verifyNoMoreInteractions(cartRepository, itemMapper);
     }
 
 
+    @Test
+    @DisplayName("update existing quantity")
+    void should_UpdateExistingQuantity_When_ItemAlreadyExistedInACard() {
+
+        // given
+        doReturn(Optional.of(cart)).when(cartRepository).findCartByUserId(userId);
+        cart.getItems().add(existingItem);
+
+        doNothing().when(itemMapper).updateEntityFromDto(any(ItemDto.class), any(Item.class));
+        doAnswer(invocation -> invocation.getArgument(0)).when(cartRepository).save(any(Cart.class));
+        Set<ItemDto> itemDtoSet = Set.of(newItemDto);
+        doReturn(itemDtoSet).when(itemMapper).toDtoSet(anySet());
+
+        Set<ItemDto> resultSet = cartService.addItemToTheCart(userId, newItemDto);
+        assertNotNull(resultSet);
+        assertEquals(1, resultSet.size());
+        assertTrue(resultSet.contains(newItemDto));
+        assertEquals(newQuantity, resultSet.iterator().next().quantity());
 
 
 
+        verify(cartRepository, times(1)).findCartByUserId(userId);
+        verify(itemMapper, times(1)).updateEntityFromDto(any(ItemDto.class), any(Item.class));
+        verify(itemMapper, times(0)).toEntity(any(ItemDto.class));
+        verify(cartRepository, times(1)).save(any(Cart.class));
+        verify(itemMapper, times(1)).toDtoSet(anySet());
 
+        verify(cartRepository).findCartByUserId(userIdArgumentCaptor.capture());
+        assertEquals(userId, userIdArgumentCaptor.getValue().longValue());
+        verify(itemMapper).updateEntityFromDto(itemDtoArgumentCaptor.capture(), itemArgumentCaptor.capture());
+        assertEquals(newItemDto, itemDtoArgumentCaptor.getValue());
+        assertEquals(existingItem, itemArgumentCaptor.getValue());
+        verify(cartRepository).save(cartArgumentCaptor.capture());
+        assertEquals(itemWithNewQuantity, cartArgumentCaptor.getValue().getItems().iterator().next());
+        verify(itemMapper).toDtoSet(itemSetArgumentCaptor.capture());
+        assertEquals(itemWithNewQuantity, itemSetArgumentCaptor.getValue().iterator().next());
+        verifyNoMoreInteractions(cartRepository, itemMapper);
+
+    }
 }

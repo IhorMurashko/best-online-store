@@ -1,10 +1,10 @@
-CREATE TABLE carts
+CREATE TABLE user_cart.carts
 (
     id      BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL
 );
 
-CREATE TABLE items
+CREATE TABLE user_cart.items
 (
     id            BIGSERIAL PRIMARY KEY,
     cart_id       BIGINT         NOT NULL,
@@ -15,16 +15,16 @@ CREATE TABLE items
 );
 CREATE SEQUENCE item_seq START WITH 1;
 
-ALTER TABLE items
+ALTER TABLE user_cart.items
     ALTER COLUMN id SET DEFAULT nextval('item_seq');
 
 
 CREATE SEQUENCE cart_seq START WITH 1;
 
-ALTER TABLE carts
+ALTER TABLE user_cart.carts
     ALTER COLUMN id SET DEFAULT nextval('cart_seq');
 
 
-CREATE INDEX carts_user_id_idx ON carts (user_id);
-CREATE INDEX items_cart_id_idx ON items (cart_id);
+CREATE INDEX carts_user_id_idx ON user_cart.carts (user_id);
+CREATE INDEX items_cart_id_idx ON user_cart.items (cart_id);
 

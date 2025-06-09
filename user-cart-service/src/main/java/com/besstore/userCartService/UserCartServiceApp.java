@@ -10,9 +10,8 @@ public class UserCartServiceApp {
     public static void main(String[] args) {
         SpringApplication.run(UserCartServiceApp.class, args);
 
-        //todo: docs
-        //todo: no sleeping service
-
-
+//        todo: tests
+//        todo: docs
+//        todo: CI/CD
     }
 }

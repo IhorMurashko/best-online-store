@@ -7,6 +7,8 @@ public record ItemDto(
         @NonNull
         Long productId,
         @NonNull
+        String imageUrl,
+        @NonNull
         @Positive
         Short quantity,
         @NonNull
