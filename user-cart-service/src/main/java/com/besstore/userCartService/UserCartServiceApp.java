@@ -12,6 +12,5 @@ public class UserCartServiceApp {
 
 //        todo: tests
 //        todo: docs
-//        todo: CI/CD
     }
 }
