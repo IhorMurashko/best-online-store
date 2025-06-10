@@ -3,6 +3,7 @@ package com.besstore.userCartService.exceptionHandler;
 import com.besstore.userCartService.exception.UserCartNotFoundException;
 import com.common.lib.exception.BaseExceptionResponse;
 import com.common.lib.exception.RequestDoesNotContainsHeader;
+import com.common.lib.exception.ResponseExceptionProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
