@@ -24,6 +24,7 @@
         <module>eureka-service-registry</module>
         <module>common-dto</module>
         <module>notification-service</module>
+        <module>user-cart-service</module>
     </modules>
     <dependencies>
         <dependency>
@@ -90,6 +91,10 @@
 
         <!-- Mail -->
         <spring-boot-starter-mail.version>3.4.5</spring-boot-starter-mail.version>
+
+        <!-- Cache -->
+        <spring-boot-starter-data-redis.redis>3.4.5</spring-boot-starter-data-redis.redis>
+        <caffeine.version>3.2.0</caffeine.version>
     </properties>
 
     <dependencyManagement>
@@ -270,6 +275,21 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-mail</artifactId>
                 <version>${spring-boot-starter-mail.version}</version>
+            </dependency>
+
+            <!-- Cache -->
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-starter-data-redis.redis}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeine -->
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
             </dependency>
 
 

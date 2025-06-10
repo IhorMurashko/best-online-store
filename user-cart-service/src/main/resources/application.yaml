@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: cart-service
+  profiles:
+    active: dev
+  cache:
+    type: caffeine
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
