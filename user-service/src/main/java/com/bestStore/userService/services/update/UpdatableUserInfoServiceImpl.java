@@ -1,11 +1,11 @@
-package com.bestStore.userService.services.update;
+package com.beststore.userservice.services.update;
 
-import com.bestStore.userService.exceptions.ExceptionMessageProvider;
-import com.bestStore.userService.exceptions.UserNotFoundException;
-import com.bestStore.userService.mapper.UpdatableUserInfoMapper;
-import com.bestStore.userService.mapper.UserFullInfoMapper;
-import com.bestStore.userService.model.User;
-import com.bestStore.userService.services.userCrudService.UserCrudService;
+import com.beststore.userservice.exceptions.ExceptionMessageProvider;
+import com.beststore.userservice.exceptions.UserNotFoundException;
+import com.beststore.userservice.mapper.UpdatableUserInfoMapper;
+import com.beststore.userservice.mapper.UserFullInfoMapper;
+import com.beststore.userservice.model.User;
+import com.beststore.userservice.services.userCrudService.UserCrudService;
 import com.common.lib.userModule.userDto.request.UserUpdateRequestDto;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;
 import lombok.RequiredArgsConstructor;

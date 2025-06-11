@@ -1,6 +1,6 @@
-package com.bestStore.userService.mapper;
+package com.beststore.userservice.mapper;
 
-import com.bestStore.userService.model.User;
+import com.beststore.userservice.model.User;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

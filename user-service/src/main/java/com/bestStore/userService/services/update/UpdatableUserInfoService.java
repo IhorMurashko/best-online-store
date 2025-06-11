@@ -1,4 +1,4 @@
-package com.bestStore.userService.services.update;
+package com.beststore.userservice.services.update;
 
 import com.common.lib.userModule.userDto.request.UserUpdateRequestDto;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;

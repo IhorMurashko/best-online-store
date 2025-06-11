@@ -1,4 +1,4 @@
-package com.bestStore.userService.mapper;
+package com.beststore.userservice.mapper;
 
 import java.util.List;
 

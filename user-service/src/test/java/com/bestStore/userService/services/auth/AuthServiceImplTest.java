@@ -1,13 +1,15 @@
 package com.bestStore.userService.services.auth;
 
-import com.bestStore.userService.exceptions.ExceptionMessageProvider;
-import com.bestStore.userService.exceptions.UserNotFoundException;
-import com.bestStore.userService.mapper.UserFullInfoMapper;
-import com.bestStore.userService.model.User;
-import com.bestStore.userService.services.userCrudService.UserCrudService;
+import com.beststore.userservice.exceptions.ExceptionMessageProvider;
+import com.beststore.userservice.exceptions.UserNotFoundException;
+import com.beststore.userservice.mapper.UserFullInfoMapper;
+import com.beststore.userservice.model.User;
+import com.beststore.userservice.services.auth.AuthServiceImpl;
+import com.beststore.userservice.services.userCrudService.UserCrudService;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.InvalidAuthCredentials;
+import com.common.lib.userModule.AuthProvider.AuthProvider;
 import com.common.lib.userModule.roles.Role;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponseDto;
@@ -86,7 +88,7 @@ class AuthServiceImplTest {
                 userEmail,
                 userPassword
         );
-        this.user = new User(userEmail, userPassword, true, true,
+        this.user = new User(userEmail, userPassword, AuthProvider.LOCAL, null, true, true,
                 true, true, roles);
 
 

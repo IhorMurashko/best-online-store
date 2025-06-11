@@ -11,10 +11,10 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @EnableEurekaServer
 @SpringBootApplication
 @EnableWebSecurity
-public class MicroservicesAuthApplication {
+public class AuthApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroservicesAuthApplication.class, args);
+		SpringApplication.run(AuthApplication.class, args);
 
 	}
 	@Bean

@@ -1,5 +1,6 @@
-package com.bestStore.userService.model;
+package com.beststore.userservice.model;
 
+import com.common.lib.userModule.AuthProvider.AuthProvider;
 import com.common.lib.userModule.roles.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -73,8 +74,22 @@ public abstract class AbstractBasicUser {
     /**
      * Encrypted user password. Must be non-null.
      */
-    @Column(nullable = false)
+    @Column(/*nullable = false*/)
     protected String password;
+
+    /**
+     * Authentication provider for the user.
+     * For example: LOCAL, GOOGLE, GITHUB.
+     */
+    @Column(nullable = false)
+    protected AuthProvider authProvider;
+
+    /**
+     * Unique identifier from the OAuth provider.
+     * Nullable for users registered with local authentication.
+     */
+    @Column(nullable = true)
+    protected String oauthId;
 
     /**
      * Flag indicating whether the user's account is expired.

@@ -1,7 +1,8 @@
 package com.example.microservices_auth.controllers;
 
-import com.bestStore.userService.exceptions.ExceptionMessageProvider;
-import com.bestStore.userService.utils.UserFieldAdapter;
+
+import com.beststore.userservice.exceptions.ExceptionMessageProvider;
+import com.beststore.userservice.utils.UserFieldAdapter;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.InvalidAuthCredentials;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class RegistrationController {
     public ResponseEntity<?> createUser(@RequestBody RegistrationCredentialsDto dto) {
         if (!dto.password().equals(dto.confirmationPassword())) {
             log.error("Passwords do not match");
-            throw new InvalidAuthCredentials(String.format(ExceptionMessageProvider.PASSWORDS_DONT_MATCH));
+            throw new InvalidAuthCredentials(ExceptionMessageProvider.PASSWORDS_DONT_MATCH);
         }
 
         String email = UserFieldAdapter.toLower(dto.email());
