@@ -18,8 +18,8 @@
     <name>Best Online Store</name>
 
     <modules>
-        <module>user-service</module>
         <module>auth-service</module>
+        <module>user-service</module>
         <module>gateway-service</module>
         <module>eureka-service-registry</module>
         <module>common-dto</module>
