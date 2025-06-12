@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: bmi-service
+  ai:
+    openai:
+      api-key: ${API_KEY}
+      base-url: ${API_MODEL}
+      chat:
+        options:
+          model: ${API_MODEL}
+

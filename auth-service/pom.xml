@@ -17,6 +17,8 @@
 	<artifactId>auth-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>auth-service</name>
+	<packaging>jar</packaging>
+
 	<description>
 		Authentication Microservice - Secure JWT-based authentication provider
 		for Best Online Store ecosystem
@@ -121,12 +123,8 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-codec-http</artifactId>
         </dependency>
-		<dependency>
-			<groupId>com.beststore</groupId>
-			<artifactId>user-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
+
+
 
 	</dependencies>
 
@@ -142,35 +140,15 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<repositories>
-		<repository>
-			<id>github</id>
-			<url>https://github.com/MattIRio/common-dto.git</url>
-		</repository>
-	</repositories>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>github</id>-->
+<!--			<url>https://github.com/MattIRio/common-dto.git</url>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 	<!-- ========== BUILD CONFIGURATION ========== -->
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.springframework.boot</groupId>
-							<artifactId>spring-boot-devtools</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>22</source>
-					<target>22</target>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 </project>

@@ -1,10 +1,11 @@
 package com.example.microservices_auth.controllers;
 
 
-import com.beststore.userservice.exceptions.ExceptionMessageProvider;
-import com.beststore.userservice.utils.UserFieldAdapter;
+
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.InvalidAuthCredentials;
+import com.common.lib.exceptions.ExceptionMessageProvider;
+import com.common.lib.utils.UserFieldAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
