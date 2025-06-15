@@ -1,0 +1,38 @@
+name: CI/CD — bmi-service
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'bmi-service/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'bmi-service/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Build & test bmi-service
+        run: mvn clean verify -pl bmi-service -am -Pdev
+
+  deploy:
+    name: Deploy bmi-service
+    needs: build
+    if: github.ref == 'refs/heads/main' && success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy for bmi-service
+        run: curl -X POST "${{ secrets.RENDER_HOOK_BMI_SERVICE }}"
