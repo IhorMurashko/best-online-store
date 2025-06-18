@@ -15,8 +15,6 @@ target/
 # OS
 .DS_Store
 Thumbs.db
-*.xml
-*.xml
 api-gateway/.gitattributes
 *.properties
 api-gateway/mvnw
