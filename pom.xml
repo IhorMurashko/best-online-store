@@ -25,14 +25,15 @@
         <module>common-dto</module>
         <module>notification-service</module>
         <module>user-cart-service</module>
+        <module>test</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-netflix-eureka-server</artifactId>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+<!--    <dependencies>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-netflix-eureka-server</artifactId>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
 
 
     <packaging>pom</packaging>
