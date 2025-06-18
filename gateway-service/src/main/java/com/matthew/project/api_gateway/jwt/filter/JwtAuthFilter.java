@@ -38,8 +38,10 @@ public class JwtAuthFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        String path = exchange.getRequest().getURI().getPath();
+        log.debug("JWT AuthFilter: path={}, Authorization header={}", path, authHeader);
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ") || path.startsWith("/test")) {
             return chain.filter(exchange);
         }
 
