@@ -1,29 +1,30 @@
-# Maven
+### Maven
 target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.settings/
+
+### Maven Wrapper
+!mvnw
+!mvnw.cmd
 !.mvn/wrapper/maven-wrapper.jar
 
-# IntelliJ
+### IntelliJ
 .idea/
 *.iml
 *.iws
 
-# Logs
+### Logs
 *.log
 
+### Environment
 .env
 
-# OS
+### OS files
 .DS_Store
 Thumbs.db
-api-gateway/.gitattributes
-*.properties
-api-gateway/mvnw
-*.cmd
-*.md
-microservices-auth/mvnw
-service-registry/.gitattributes
-service-registry/mvnw
-test-methods-service/.gitattributes
-test-methods-service/mvnw
-/.idea
-.idea/misc.xml
