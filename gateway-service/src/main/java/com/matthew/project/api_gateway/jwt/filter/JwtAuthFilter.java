@@ -38,6 +38,8 @@ public class JwtAuthFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        String path = exchange.getRequest().getURI().getPath();
+        log.debug("JWT AuthFilter: path={}, Authorization header={}", path, authHeader);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return chain.filter(exchange);
@@ -80,9 +82,8 @@ public class JwtAuthFilter implements WebFilter {
                     .contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth));
 
         } catch (Exception e) {
-            log.error("[Gateway] JWT processing error: {}", e.getMessage());
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
+            log.error("[Gateway] JWT processing exception: {}. Proceeding without auth.", e.getMessage());
+            return chain.filter(exchange);
         }
     }
 }

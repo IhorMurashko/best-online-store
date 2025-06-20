@@ -9,5 +9,9 @@
 FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY target/*.jar app.jar
-EXPOSE 8761
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# EXPOSE необязателен для Railway, но полезен для локальной разработки
+EXPOSE ${PORT:-8761}
+
+# Важно: передаем порт через аргумент
+ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=${PORT}"]

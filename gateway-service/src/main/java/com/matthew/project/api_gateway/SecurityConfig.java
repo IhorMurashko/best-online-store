@@ -20,7 +20,7 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/all/**", "/authenticate/**", "/register/user/**").permitAll()
+                        .pathMatchers("/all/**", "/authenticate/**", "/register/user/**", "/test", "/api/v1/user-test/**").permitAll()
                         .pathMatchers("user/**").hasAnyRole("USER")
                         .pathMatchers("admin/**").hasAnyRole("ADMIN")
                         .anyExchange().authenticated()
