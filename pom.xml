@@ -28,6 +28,7 @@
     </modules>
 
 
+
     <packaging>pom</packaging>
     <description>Backend for an online store project built with Spring Boot 3.4 and Java 17.</description>
 
@@ -132,6 +133,12 @@
                 <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
             </dependency>
 
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-netflix-eureka-server</artifactId>
+                <scope>compile</scope>
+            </dependency>
 
             <!-- GRPC server and client -->
             <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-spring-boot-starter -->
