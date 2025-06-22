@@ -1,9 +1,11 @@
 package com.example.microservices_auth.controllers;
 
-import com.bestStore.userService.exceptions.ExceptionMessageProvider;
-import com.bestStore.userService.utils.UserFieldAdapter;
+
+
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.InvalidAuthCredentials;
+import com.common.lib.exceptions.ExceptionMessageProvider;
+import com.common.lib.utils.UserFieldAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -37,7 +39,7 @@ public class RegistrationController {
     public ResponseEntity<?> createUser(@RequestBody RegistrationCredentialsDto dto) {
         if (!dto.password().equals(dto.confirmationPassword())) {
             log.error("Passwords do not match");
-            throw new InvalidAuthCredentials(String.format(ExceptionMessageProvider.PASSWORDS_DONT_MATCH));
+            throw new InvalidAuthCredentials(ExceptionMessageProvider.PASSWORDS_DONT_MATCH);
         }
 
         String email = UserFieldAdapter.toLower(dto.email());

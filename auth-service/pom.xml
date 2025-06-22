@@ -17,6 +17,8 @@
 	<artifactId>auth-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>auth-service</name>
+	<packaging>jar</packaging>
+
 	<description>
 		Authentication Microservice - Secure JWT-based authentication provider
 		for Best Online Store ecosystem
@@ -24,9 +26,9 @@
 
 	<!-- ========== PROPERTIES ========== -->
 	<properties>
-		<java.version>23</java.version>
-		<maven.compiler.source>22</maven.compiler.source>
-		<maven.compiler.target>22</maven.compiler.target>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<spring-cloud.version>2024.0.1</spring-cloud.version>
 		<jjwt.version>0.12.6</jjwt.version>
 	</properties>
@@ -38,13 +40,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<groupId>com.beststore</groupId>
+			<artifactId>common-dto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -52,21 +56,17 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.38</version>
-		</dependency>
+<!--		&lt;!&ndash; Service Discovery &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-loadbalancer</artifactId>-->
+<!--		</dependency>-->
 
-		<!-- Service Discovery -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
-		</dependency>
+
 
 		<!-- JWT Implementation -->
 		<dependency>
@@ -87,13 +87,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Database -->
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -105,16 +98,11 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.beststore</groupId>
-            <artifactId>common-dto</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.beststore</groupId>
-            <artifactId>user-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -124,7 +112,14 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-http</artifactId>
+        </dependency>
+
+
+
+	</dependencies>
 
 	<!-- ========== DEPENDENCY MANAGEMENT ========== -->
 	<dependencyManagement>
@@ -138,30 +133,18 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>github</id>-->
+<!--			<url>https://github.com/MattIRio/common-dto.git</url>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 	<!-- ========== BUILD CONFIGURATION ========== -->
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.springframework.boot</groupId>
-							<artifactId>spring-boot-devtools</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>22</source>
-					<target>22</target>
-					<compilerArgs>--enable-preview</compilerArgs>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

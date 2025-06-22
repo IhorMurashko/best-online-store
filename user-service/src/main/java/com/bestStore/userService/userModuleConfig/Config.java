@@ -1,4 +1,4 @@
-package com.bestStore.userService.userModuleConfig;
+package com.beststore.userservice.userModuleConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

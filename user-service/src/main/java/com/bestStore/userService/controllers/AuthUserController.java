@@ -1,12 +1,13 @@
-package com.bestStore.userService.controllers;
+package com.beststore.userservice.controllers;
 
 
-import com.bestStore.userService.exceptions.ExceptionMessageProvider;
-import com.bestStore.userService.services.auth.AuthService;
-import com.bestStore.userService.services.update.UpdatableUserInfoService;
-import com.bestStore.userService.services.userCrudService.UserCrudServiceImpl;
+import com.beststore.userservice.exceptions.ExceptionMessageProvider;
+import com.beststore.userservice.services.auth.AuthService;
+import com.beststore.userservice.services.update.UpdatableUserInfoService;
+import com.beststore.userservice.services.userCrudService.UserCrudServiceImpl;
 import com.common.lib.authModule.authDto.BasicUserAuthenticationResponseDto;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
+import com.common.lib.authModule.authDto.OauthRegistrationCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.RequestDoesNotContainsHeader;
 import com.common.lib.headers.HeadersProvider;
@@ -71,6 +72,16 @@ public class AuthUserController {
                     required = true)
             @RequestBody @Valid RegistrationCredentialsDto registrationCredentialsDto) {
         authService.registration(registrationCredentialsDto, Set.of(Role.ROLE_USER));
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/create-oauth")
+    public ResponseEntity<HttpStatus> createOauthUser(
+            @Parameter(
+                    description = "user's credentials for the registration in the system",
+                    required = true)
+            @RequestBody @Valid OauthRegistrationCredentialsDto oauthRegistrationCredentialsDto) {
+        authService.oauthRegistration(oauthRegistrationCredentialsDto, Set.of(Role.ROLE_USER));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -161,6 +172,27 @@ public class AuthUserController {
                 = authService.getCurrentUserInfo(userEmail);
 
         return ResponseEntity.ok(currentUserInfo);
+    }
+
+    @GetMapping("/exist-by-email")
+    public ResponseEntity<Boolean> existsByEmail(
+            @Parameter(
+                    description = "check if user exist by email"
+            )
+
+            @RequestHeader(value = HeadersProvider.USER_EMAIL_HEADER_NAME) String userEmail
+    ) {
+
+        if (userEmail == null) {
+            throw new RequestDoesNotContainsHeader(
+                    String.format(
+                            ExceptionMessageProvider.REQUEST_HEADER_DOES_NOT_PRESENT,
+                            HeadersProvider.USER_EMAIL_HEADER_NAME
+                    )
+            );
+        }
+
+        return ResponseEntity.ok(userCrudService.isEmailExist(userEmail));
     }
 
 

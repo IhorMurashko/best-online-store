@@ -1,15 +1,17 @@
-package com.bestStore.userService.services.auth;
+package com.beststore.userservice.services.auth;
 
-import com.bestStore.userService.exceptions.ExceptionMessageProvider;
-import com.bestStore.userService.exceptions.UserNotFoundException;
-import com.bestStore.userService.mapper.UserFullInfoMapper;
-import com.bestStore.userService.model.User;
-import com.bestStore.userService.services.userCrudService.UserCrudService;
-import com.bestStore.userService.utils.UserFieldAdapter;
+import com.beststore.userservice.exceptions.ExceptionMessageProvider;
+import com.beststore.userservice.exceptions.UserNotFoundException;
+import com.beststore.userservice.mapper.UserFullInfoMapper;
+import com.beststore.userservice.model.User;
+import com.beststore.userservice.services.userCrudService.UserCrudService;
+import com.beststore.userservice.utils.UserFieldAdapter;
 import com.common.lib.authModule.authDto.BasicUserAuthenticationResponseDto;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
+import com.common.lib.authModule.authDto.OauthRegistrationCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.InvalidAuthCredentials;
+import com.common.lib.userModule.AuthProvider.AuthProvider;
 import com.common.lib.userModule.roles.Role;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -57,6 +58,8 @@ public class AuthServiceImpl implements AuthService {
         User user = new User(
                 registrationCredentials.email(),
                 registrationCredentials.password(),
+                AuthProvider.LOCAL,
+                null,
                 true, true, true, true,
                 roles
         );
@@ -65,6 +68,39 @@ public class AuthServiceImpl implements AuthService {
 
         return true;
     }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Override
+    public boolean oauthRegistration(OauthRegistrationCredentialsDto oauthRegistrationCredentialsDto, Set<Role> roles) {
+
+        if (userCrudService.isEmailExist(oauthRegistrationCredentialsDto.email())) {
+            log.error("Email already exist");
+            throw new InvalidAuthCredentials(String.format(
+                    ExceptionMessageProvider.EMAIL_ALREADY_EXIST, oauthRegistrationCredentialsDto.email()
+            ));
+        }
+        System.out.println(oauthRegistrationCredentialsDto.oauthId());
+        System.out.println(oauthRegistrationCredentialsDto.oauthProvider());
+        User user = new User(
+                oauthRegistrationCredentialsDto.email(),
+                null,
+                oauthRegistrationCredentialsDto.oauthProvider(),
+                oauthRegistrationCredentialsDto.oauthId(),
+                true, true, true, true,
+                roles
+        );
+
+        String fullName = oauthRegistrationCredentialsDto.fullName();
+        String[] firstAndLastName = fullName.split(" ", 2);
+
+        user.setFirstName(firstAndLastName[0]);
+        user.setLastName(firstAndLastName.length > 1 ? firstAndLastName[1] : "");
+
+        userCrudService.save(user);
+
+        return true;
+    }
+
 
     @Override
     public BasicUserInfoResponse login(@NonNull LoginCredentialsDto loginCredentials) {

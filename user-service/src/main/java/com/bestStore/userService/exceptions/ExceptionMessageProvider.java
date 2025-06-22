@@ -1,4 +1,4 @@
-package com.bestStore.userService.exceptions;
+package com.beststore.userservice.exceptions;
 
 import lombok.experimental.UtilityClass;
 

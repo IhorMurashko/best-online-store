@@ -1,4 +1,4 @@
-package com.bestStore.userService.utils;
+package com.beststore.userservice.utils;
 
 import lombok.experimental.UtilityClass;
 import org.mapstruct.Named;

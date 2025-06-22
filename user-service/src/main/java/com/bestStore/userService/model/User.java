@@ -1,5 +1,6 @@
-package com.bestStore.userService.model;
+package com.beststore.userservice.model;
 
+import com.common.lib.userModule.AuthProvider.AuthProvider;
 import com.common.lib.userModule.roles.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -41,12 +42,16 @@ public class User extends AbstractBasicUser {
     private String streetName;
     private String houseNumber;
     private String zipCode;
+    private AuthProvider authProvider;
+    private String oauthId;
 
-    public User(String email, String password,
+    public User(String email, String password, AuthProvider authProvider, String oauthId,
                 boolean isAccountNonExpired, boolean isAccountNonLocked,
                 boolean isCredentialsNonExpired, boolean isEnabled,
                 Set<Role> roles) {
         super(email, password, isAccountNonExpired, isAccountNonLocked,
                 isCredentialsNonExpired, isEnabled, roles);
+        this.authProvider = authProvider;
+        this.oauthId = oauthId;
     }
 }

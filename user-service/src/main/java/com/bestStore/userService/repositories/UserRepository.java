@@ -1,6 +1,6 @@
-package com.bestStore.userService.repositories;
+package com.beststore.userservice.repositories;
 
-import com.bestStore.userService.model.User;
+import com.beststore.userservice.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;

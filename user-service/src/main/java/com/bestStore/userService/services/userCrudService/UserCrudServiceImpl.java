@@ -1,10 +1,9 @@
-package com.bestStore.userService.services.userCrudService;
+package com.beststore.userservice.services.userCrudService;
 
-import com.bestStore.userService.exceptions.ExceptionMessageProvider;
-import com.bestStore.userService.exceptions.UserNotFoundException;
-import com.bestStore.userService.model.User;
-import com.bestStore.userService.repositories.UserRepository;
-import com.bestStore.userService.utils.UserFieldAdapter;
+import com.beststore.userservice.exceptions.ExceptionMessageProvider;
+import com.beststore.userservice.exceptions.UserNotFoundException;
+import com.beststore.userservice.model.User;
+import com.beststore.userservice.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;

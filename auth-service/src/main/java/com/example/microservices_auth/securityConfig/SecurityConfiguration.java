@@ -1,6 +1,7 @@
 package com.example.microservices_auth.securityConfig;
 
 
+import com.example.microservices_auth.Oauth2.CustomOAuth2SuccessHandler;
 import com.example.microservices_auth.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,20 +27,26 @@ public class SecurityConfiguration {
     @Autowired
     private MyUserDetailService userDetailService;
 
+    @Autowired
+    final CustomOAuth2SuccessHandler successHandler;
+
+    public SecurityConfiguration(CustomOAuth2SuccessHandler successHandler) {
+        this.successHandler = successHandler;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/home", "/register/**", "/authenticate").permitAll();
-
-                    registry.requestMatchers("/api/v1/user/create").permitAll();
-
+                    registry.requestMatchers("/home", "/register/**", "/authenticate", "/test").permitAll();
                     registry.requestMatchers("/admin/**").hasRole("ADMIN");
                     registry.requestMatchers("/user/**").hasRole("USER");
                     registry.anyRequest().authenticated();
                 })
-                .oauth2Login(Customizer.withDefaults())
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler(successHandler)
+                )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }
