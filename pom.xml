@@ -25,7 +25,6 @@
         <module>common-dto</module>
         <module>notification-service</module>
         <module>user-cart-service</module>
-        <module>test</module>
     </modules>
 
 

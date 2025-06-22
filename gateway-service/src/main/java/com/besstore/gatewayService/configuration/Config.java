@@ -17,6 +17,9 @@ public class Config {
                 .route("test-service",
                         r ->
                                 r.path("/test/**")
+                                        .filters(filter ->
+                                                filter.addRequestHeader("X-Test-Id", "testHeader")
+                                        )
                                         .uri(testServicePath)
                 )
                 .build();
