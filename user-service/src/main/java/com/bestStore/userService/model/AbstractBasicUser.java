@@ -1,4 +1,4 @@
-package com.beststore.userservice.model;
+package com.bestStore.userService.model;
 
 import com.common.lib.userModule.AuthProvider.AuthProvider;
 import com.common.lib.userModule.roles.Role;
@@ -72,9 +72,10 @@ public abstract class AbstractBasicUser {
     protected String email;
 
     /**
-     * Encrypted user password. Must be non-null.
+     * Encrypted user password.
+     * Can be nullable for users registered with social network authentication.
      */
-    @Column(/*nullable = false*/)
+    @Column(nullable = true)
     protected String password;
 
     /**

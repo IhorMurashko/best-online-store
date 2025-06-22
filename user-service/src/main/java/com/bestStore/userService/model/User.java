@@ -1,4 +1,4 @@
-package com.beststore.userservice.model;
+package com.bestStore.userService.model;
 
 import com.common.lib.userModule.AuthProvider.AuthProvider;
 import com.common.lib.userModule.roles.Role;
