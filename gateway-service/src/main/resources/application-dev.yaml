@@ -1,6 +1,15 @@
-services:
-  test-service:
-    path: http://localhost:8080
+security-lib:
+  secret:
+    key:
+      internal: hxsBGjbPYmYDKKbNfIIGBGv8DFJXOSki
+      jwt: Uroqf1X43fE5jPEGGPLJdoBTBISZYN52
 
-server:
-  port: 8081
+spring:
+  docker:
+    compose:
+      enabled: true
+      lifecycle-management: start_and_stop
+      file: gateway-service/docker-compose.yaml
+  data:
+    redis:
+      port: 6379
