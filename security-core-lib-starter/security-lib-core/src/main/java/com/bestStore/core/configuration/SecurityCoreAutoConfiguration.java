@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -43,4 +44,12 @@ public class SecurityCoreAutoConfiguration {
     public JwtTokenProvider defaultJwtTokenProvider(SecretKey secretKey) {
         return new DefaultJwtTokenProvider(secretKey);
     }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+return  new BCryptPasswordEncoder();
+    }
+
+
 }
