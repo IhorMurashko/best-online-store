@@ -72,6 +72,4 @@ public class DefaultJwtTokenProvider implements JwtTokenProvider {
             return false;
         }
     }
-
-
 }

@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 /**
  * Adapter that converts a JWT token string into a structured {@link HttpHeaders} object
  * by extracting specific claims and placing them into predefined header fields.
@@ -46,46 +47,21 @@ import java.util.stream.Collectors;
 public class HttpHeaderAdapter implements HeaderAdapter<HttpHeaders, String> {
 
     private final ClaimsProvider claimsProvider;
+    private final ObjectMapper objectMapper;
+
 
     public HttpHeaderAdapter(ClaimsProvider claimsProvider) {
         this.claimsProvider = claimsProvider;
+        this.objectMapper = new ObjectMapper();
     }
 
 
     @Override
     public HttpHeaders convert(@NonNull String token) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-
-        String userId = Optional.ofNullable(claimsProvider.extractClaimFromToken(token, claims ->
-                        claims.get(TokenClaimsConstants.USER_ID_CLAIM, String.class)))
-                .orElseThrow(() ->
-                        new JwtClaimsException(
-                                String.format(
-                                        ExceptionMessageConstants
-                                                .TOKEN_DOESNT_HAVE_REQUIRED_CLAIM, "id"
-                                )));
-
-
-        String username = Optional.ofNullable(claimsProvider.extractClaimFromToken(token,
-                        claims ->
-                                claims.get(TokenClaimsConstants.USERNAME_CLAIM, String.class)))
-                .orElseThrow(() ->
-                        new JwtClaimsException(
-                                String.format(
-                                        ExceptionMessageConstants
-                                                .TOKEN_DOESNT_HAVE_REQUIRED_CLAIM, "username"
-                                )));
-        String tokenType = Optional.ofNullable(claimsProvider.extractClaimFromToken(token,
-                        claims ->
-                                claims.get(TokenClaimsConstants.TOKEN_TYPE_CLAIM, String.class)))
-                .orElseThrow(() ->
-                        new JwtClaimsException(
-                                String.format(
-                                        ExceptionMessageConstants
-                                                .TOKEN_DOESNT_HAVE_REQUIRED_CLAIM, "token type"
-                                )));
+        String userId = extractRequiredClaim(token, TokenClaimsConstants.USER_ID_CLAIM, String.class);
+        String username = extractRequiredClaim(token, TokenClaimsConstants.USERNAME_CLAIM, String.class);
+        String tokenType = extractRequiredClaim(token, TokenClaimsConstants.TOKEN_TYPE_CLAIM, String.class);
 
 
         Set<String> rolesList = Optional.of(claimsProvider.extractClaimFromToken(token, claims -> {
@@ -100,8 +76,8 @@ public class HttpHeaderAdapter implements HeaderAdapter<HttpHeaders, String> {
                             return Set.of(roleString);
                         }
                     } else if (raw instanceof Collection) {
-                        // Если это коллекция, конвертируем обычным способом
-                        return objectMapper.convertValue(raw, new TypeReference<Set<String>>() {});
+                        return objectMapper.convertValue(raw, new TypeReference<Set<String>>() {
+                        });
                     } else {
                         throw new IllegalArgumentException("Unexpected type for roles claim: " + raw.getClass());
                     }
@@ -118,5 +94,14 @@ public class HttpHeaderAdapter implements HeaderAdapter<HttpHeaders, String> {
         headers.set(HeadersConstants.HEADER_TOKEN_TYPE, tokenType);
         headers.set(HeadersConstants.HEADER_ROLES, role);
         return headers;
+    }
+
+
+    private <T> T extractRequiredClaim(String token, String claimKey, Class<T> clazz) {
+        return Optional.ofNullable(claimsProvider.extractClaimFromToken(token,
+                        claims -> claims.get(claimKey, clazz)))
+                .orElseThrow(() -> new JwtClaimsException(
+                        String.format(ExceptionMessageConstants.TOKEN_DOESNT_HAVE_REQUIRED_CLAIM, claimKey)
+                ));
     }
 }

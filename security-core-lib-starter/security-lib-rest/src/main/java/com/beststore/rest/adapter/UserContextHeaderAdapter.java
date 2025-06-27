@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 /**
  * Adapter that converts an {@link HttpServletRequest} into a {@link UserContext}
  * by extracting user-related headers injected by the API Gateway.
@@ -45,33 +46,10 @@ public class UserContextHeaderAdapter implements HeaderAdapter<UserContext, Http
     @Override
     public UserContext convert(@NonNull HttpServletRequest request) {
 
-        String userId = Optional.ofNullable(request.getHeader(HeadersConstants.HEADER_USER_ID))
-                .orElseThrow(() ->
-                        new HeaderClaimException(
-                                String.format(
-                                        ExceptionMessageConstants
-                                                .HEADER_DOESNT_HAVE_REQUIRED_RAW, "id")
-                        )
-                );
 
-
-        String username = Optional.ofNullable(request.getHeader(HeadersConstants.HEADER_USERNAME))
-                .orElseThrow(() ->
-                        new HeaderClaimException(
-                                String.format(
-                                        ExceptionMessageConstants
-                                                .HEADER_DOESNT_HAVE_REQUIRED_RAW, "username")
-                        )
-                );
-
-        String roles = Optional.ofNullable(request.getHeader(HeadersConstants.HEADER_ROLES))
-                .orElseThrow(() ->
-                        new HeaderClaimException(
-                                String.format(
-                                        ExceptionMessageConstants
-                                                .HEADER_DOESNT_HAVE_REQUIRED_RAW, "roles")
-                        )
-                );
+        String userId = getRequiredHeader(request, HeadersConstants.HEADER_USER_ID);
+        String username = getRequiredHeader(request, HeadersConstants.HEADER_USERNAME);
+        String roles = getRequiredHeader(request, HeadersConstants.HEADER_ROLES);
 
         if (roles.isBlank()) {
             throw new HeaderClaimException(
@@ -89,5 +67,16 @@ public class UserContextHeaderAdapter implements HeaderAdapter<UserContext, Http
                 .collect(Collectors.collectingAndThen(Collectors.toSet(), Set::copyOf));
 
         return new UserContext(userId, username, userRoles);
+    }
+
+
+    private String getRequiredHeader(HttpServletRequest request, String headerName) {
+        return Optional.ofNullable(request.getHeader(headerName))
+                .orElseThrow(() ->
+                        new HeaderClaimException(
+                                String.format(
+                                        ExceptionMessageConstants
+                                                .HEADER_DOESNT_HAVE_REQUIRED_RAW, headerName)
+                        ));
     }
 }

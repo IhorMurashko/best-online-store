@@ -30,8 +30,7 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
         log.error(accessDeniedException.getMessage(), accessDeniedException);
 
         response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getWriter().write(ExceptionMessageConstants.ACCESS_DENIED_EXCEPTION_MESSAGE);
-
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.getWriter().write(ExceptionMessageConstants.UNAUTHORIZED_EXCEPTION_MESSAGE);
     }
 }

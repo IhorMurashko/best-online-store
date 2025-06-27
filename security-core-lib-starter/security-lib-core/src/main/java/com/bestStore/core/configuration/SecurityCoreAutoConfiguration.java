@@ -1,17 +1,16 @@
 package com.bestStore.core.configuration;
 
-import com.bestStore.core.properties.SecurityKeysProperties;
 import com.bestStore.core.jwtProvider.DefaultJwtTokenProvider;
 import com.bestStore.core.jwtProvider.JwtTokenProvider;
+import com.bestStore.core.properties.SecurityKeysProperties;
 import io.jsonwebtoken.security.Keys;
+import java.nio.charset.StandardCharsets;
+import javax.crypto.SecretKey;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
 /**
  * Core auto-configuration for the security starter module.
  * <p>

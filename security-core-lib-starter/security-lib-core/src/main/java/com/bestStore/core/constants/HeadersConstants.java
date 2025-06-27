@@ -28,5 +28,5 @@ public class HeadersConstants {
     public static final String HEADER_REQUEST_TOKEN_ID = "X-Request-Token-Id";
     public static final String HEADER_INTERNAL_SECRET = "X-Internal-Secret";
 
-
+    public static final String HEADER_JSON_APPLICATION_TYPE = "application/json";
 }

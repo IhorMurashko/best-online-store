@@ -7,7 +7,6 @@ import com.bestStore.core.jwtProvider.JwtTokenProvider;
 import com.bestStore.core.properties.SecurityKeysProperties;
 import com.bestStore.core.utils.TokenRedisKeyUtil;
 import com.bestStore.gateway.exception.WebfluxExceptionResponseStatusBuilder;
-import com.bestStore.gateway.revokedTokenService.DelegationRevokeTokenService;
 import com.bestStore.gateway.revokedTokenService.RevokeTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,7 +109,7 @@ public class GatewayAuthenticationFilter implements GlobalFilter {
                     exchange,
                     HttpStatus.UNAUTHORIZED,
                     ExceptionMessageConstants.TOKEN_WAS_REVOKED,
-                    "application/json"
+                    HeadersConstants.HEADER_JSON_APPLICATION_TYPE
             );
         }
 
@@ -130,7 +129,7 @@ public class GatewayAuthenticationFilter implements GlobalFilter {
                 exchange,
                 HttpStatus.UNAUTHORIZED,
                 ExceptionMessageConstants.TOKEN_IS_NOT_VALID,
-                "application/json"
+                HeadersConstants.HEADER_JSON_APPLICATION_TYPE
         );
     }
 }

@@ -1,5 +1,7 @@
 package com.bestStore.core.utils;
 
+import org.springframework.lang.NonNull;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 /**
@@ -21,7 +23,7 @@ public class TokenRedisKeyUtil {
      * @param token the JWT token string
      * @return base64-encoded Redis-safe key
      */
-    public static String generateBase64RedisKey(String token) {
+    public static String generateBase64RedisKey(@NonNull String token) {
         return Base64.getEncoder().encodeToString(token.getBytes(StandardCharsets.UTF_8));
     }
 
