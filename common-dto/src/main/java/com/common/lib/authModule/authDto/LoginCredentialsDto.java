@@ -2,6 +2,8 @@ package com.common.lib.authModule.authDto;
 
 import org.springframework.lang.NonNull;
 
+import java.io.Serializable;
+
 /**
  * DTO used for login requests.
  * Contains email and password.
@@ -13,8 +15,6 @@ public record LoginCredentialsDto(
         String email,
 
         @NonNull
-        String password
-)
-{
+        String password) implements Serializable {
 }
 
