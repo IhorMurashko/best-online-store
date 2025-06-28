@@ -1,0 +1,5 @@
+grpc:
+  client:
+    user-service:
+      address: static://localhost:8080
+      negotiation-type: plaintext
