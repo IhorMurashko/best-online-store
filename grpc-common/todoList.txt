@@ -1,0 +1,2 @@
+- distributingManagement;
+- dependencies versions;

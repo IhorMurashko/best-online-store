@@ -4,7 +4,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.lang.NonNull;
 
+import java.io.Serializable;
+
 import static com.common.lib.userModule.constraint.FieldValidationPatterns.*;
+
 /**
  * DTO used for user registration.
  * Contains required fields to create a new user account.
@@ -26,5 +29,4 @@ public record RegistrationCredentialsDto(
 
         @NonNull
         String confirmationPassword
-) {
-}
+) implements Serializable { }

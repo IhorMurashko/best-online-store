@@ -25,6 +25,7 @@
         <module>common-dto</module>
         <module>notification-service</module>
         <module>user-cart-service</module>
+        <module>grpc-common</module>
     </modules>
 
 
@@ -51,7 +52,8 @@
 
 
         <!-- GRPC server and client  -->
-        <spring-grpc-spring-boot-starter.version>0.8.0</spring-grpc-spring-boot-starter.version>
+        <grpc-server-spring-boot-starter.version>3.1.0.RELEASE</grpc-server-spring-boot-starter.version>
+        <grpc-common.version>0.0.1-SNAPSHOT</grpc-common.version>
 
         <!-- Jjwt -->
         <jjwt.version>0.12.6</jjwt.version>
@@ -141,11 +143,19 @@
             </dependency>
 
             <!-- GRPC server and client -->
-            <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-spring-boot-starter -->
+            <!-- https://mvnrepository.com/artifact/net.devh/grpc-server-spring-boot-starter -->
             <dependency>
-                <groupId>org.springframework.grpc</groupId>
-                <artifactId>spring-grpc-spring-boot-starter</artifactId>
-                <version>${spring-grpc-spring-boot-starter.version}</version>
+                <groupId>net.devh</groupId>
+                <artifactId>grpc-spring-boot-starter</artifactId>
+                <version>${grpc-server-spring-boot-starter.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.beststore</groupId>
+                <artifactId>grpc-common</artifactId>
+                <version>${grpc-common.version}</version>
+                <scope>compile</scope>
             </dependency>
 
             <!-- DB Migration -->
