@@ -21,15 +21,23 @@
 
         <protobuf-java.version>3.25.6</protobuf-java.version>
         <grpc.version>1.73.0</grpc.version>  <!-- или актуальную стабильную версию grpc -->
-
-
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/IhorMurashko/best-online-store</url>
+        </repository>
+        <snapshotRepository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/IhorMurashko/best-online-store</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
+
         <!--                    GRPC                    -->
-
-
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-services</artifactId>

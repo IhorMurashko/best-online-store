@@ -1,4 +1,4 @@
-package com.example.service_registry;
+package com.bestStore.service_registry;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

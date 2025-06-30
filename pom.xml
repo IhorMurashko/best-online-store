@@ -16,6 +16,9 @@
     <artifactId>best-online-store</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Best Online Store</name>
+    <packaging>pom</packaging>
+    <description>Backend for an online store project built with Spring Boot 3.4 and Java 17.</description>
+
 
     <modules>
         <module>auth-service</module>
@@ -27,11 +30,6 @@
         <module>user-cart-service</module>
         <module>grpc-common</module>
     </modules>
-
-
-
-    <packaging>pom</packaging>
-    <description>Backend for an online store project built with Spring Boot 3.4 and Java 17.</description>
 
     <properties>
         <java.version>17</java.version>
