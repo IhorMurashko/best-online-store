@@ -1,10 +1,9 @@
 package com.beststore.userservice.utils;
 
 import lombok.experimental.UtilityClass;
-import org.mapstruct.Named;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import org.mapstruct.Named;
 
 @UtilityClass
 public class UserFieldAdapter {
@@ -80,6 +79,4 @@ public class UserFieldAdapter {
         if (raw == null) return null;
         return raw.replaceAll("[^A-Za-z0-9]", "").toUpperCase();
     }
-
-
 }

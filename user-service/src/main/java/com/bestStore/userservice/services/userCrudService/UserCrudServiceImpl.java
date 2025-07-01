@@ -23,9 +23,7 @@ public class UserCrudServiceImpl implements UserCrudService {
 
     @Override
     public Optional<User> findByEmail(@NonNull String email) {
-
         log.info("Find user by email: {}", email);
-
         return userRepository.findByEmail(email.toLowerCase());
     }
 

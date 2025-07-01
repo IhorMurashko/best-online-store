@@ -1,4 +1,4 @@
-package com.bestStore.registration;
+package com.beststore.registration;
 
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import org.springframework.lang.NonNull;

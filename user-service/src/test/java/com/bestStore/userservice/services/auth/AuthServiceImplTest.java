@@ -1,4 +1,4 @@
-package com.bestStore.userService.services.auth;
+package com.beststore.userservice.services.auth;
 
 import com.beststore.userservice.exceptions.ExceptionMessageProvider;
 import com.beststore.userservice.exceptions.UserNotFoundException;

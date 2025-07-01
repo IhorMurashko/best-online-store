@@ -34,9 +34,7 @@ import java.util.Set;
 @Tag(
         name = "user controller",
         description = "CRUD operations for the users."
-
 )
-
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -45,9 +43,7 @@ import java.util.Set;
 public class AuthUserController {
 
     private final AuthService authService;
-
     private final UpdatableUserInfoService updatableUserInfoService;
-
     private final UserCrudServiceImpl userCrudService;
 
     @Operation(
@@ -268,6 +264,4 @@ public class AuthUserController {
         updatableUserInfoService.deleteUser(Long.parseLong(userIdHeader));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }

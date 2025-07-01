@@ -19,6 +19,4 @@ public interface UserCrudService {
     boolean isEmailExist(@NonNull String email);
 
     boolean isUserExistById(@NonNull long id);
-
-
 }
