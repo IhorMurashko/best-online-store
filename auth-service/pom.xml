@@ -92,6 +92,11 @@
             <artifactId>grpc-common</artifactId>
         </dependency>
 
+        <!-- Security -->
+        <dependency>
+            <groupId>com.beststore</groupId>
+            <artifactId>security-starter</artifactId>
+        </dependency>
 
     </dependencies>
     <build>

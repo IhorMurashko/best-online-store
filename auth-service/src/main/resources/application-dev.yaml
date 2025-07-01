@@ -3,3 +3,11 @@ grpc:
     user-service:
       address: static://localhost:8080
       negotiation-type: plaintext
+security-lib:
+  refresh-token:
+    mode:
+      allowed-refresh-access: false
+  secret:
+    key:
+      internal: -=&*^H№|g4#YGJ]cS№dSt9O$!T^^d0C[
+      jwt: №%+*O[CSdg0=iJDTX(]s№lslQg9y&y'.
