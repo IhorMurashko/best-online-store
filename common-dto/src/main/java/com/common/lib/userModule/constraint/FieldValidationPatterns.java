@@ -59,5 +59,23 @@ public class FieldValidationPatterns {
     public static final String ZIP_CODE_PATTERN = "^[A-Za-z0-9\\-]{4,10}$";
     public static final String ZIP_CODE_MESSAGE = "ZIP code must be 4 to 10 alphanumeric characters";
 
+    /**
+     * Card number: 16 digits.
+     */
+    public static final String CARD_NUMBER_PATTERN = "^\\d{16}$";
+    public static final String CARD_NUMBER_MESSAGE = "Card number must be exactly 16 digits (e.g., 1234567812345678)";
+
+    /**
+     * Name on card: First and last names, consist of only Latin letters,
+     *      * and must be one space.
+     */
+    public static final String NAME_ON_CARD_PATTERN = "^[A-Z][a-z]+\\s[A-Z][a-z]+(?:\\s[A-Z][a-z]+)*$";
+    public static final String NAME_ON_CARD_MESSAGE = "Name on card must contain at least first and last name (e.g., John Doe)";
+
+    /**
+     * Expire date on card: contains 2 pairs of numbers with '/' between. first pair can be in 01 to 12 range
+     */
+    public static final String EXPIRE_DATE_PATTERN = "^(0[1-9]|1[0-2])/\\d{2}$";
+    public static final String EXPIRE_DATE_MESSAGE = "Expire date must be in MM/YY format (e.g., 09/27)";
 }
 

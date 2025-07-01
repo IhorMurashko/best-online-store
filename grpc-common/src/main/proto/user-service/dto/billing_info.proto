@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package dto;
+option java_package = "com.bestStore";
+option java_multiple_files = true;
+
+message BillingInfo {
+  string id = 1;
+  string nameOnCard = 2;
+  string cardNumber = 3;
+  string expireDate = 4;
+  string userId = 5;
+}
