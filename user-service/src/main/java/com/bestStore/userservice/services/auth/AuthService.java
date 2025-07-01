@@ -1,4 +1,4 @@
-package com.beststore.userservice.services.auth;
+package com.bestStore.userservice.services.auth;
 
 import com.common.lib.authModule.authDto.BasicUserAuthenticationResponseDto;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;

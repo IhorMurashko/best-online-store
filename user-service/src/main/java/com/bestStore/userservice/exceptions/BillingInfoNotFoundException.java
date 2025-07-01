@@ -1,4 +1,4 @@
-package com.beststore.userservice.exceptions;
+package com.bestStore.userservice.exceptions;
 
 public class BillingInfoNotFoundException extends RuntimeException {
     public BillingInfoNotFoundException(String message) {

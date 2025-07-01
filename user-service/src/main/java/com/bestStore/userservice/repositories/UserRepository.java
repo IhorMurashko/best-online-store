@@ -1,6 +1,6 @@
-package com.beststore.userservice.repositories;
+package com.bestStore.userservice.repositories;
 
-import com.beststore.userservice.model.User;
+import com.bestStore.userservice.model.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;

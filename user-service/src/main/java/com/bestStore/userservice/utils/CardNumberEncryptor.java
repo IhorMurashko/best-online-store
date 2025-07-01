@@ -1,4 +1,4 @@
-package com.beststore.userservice.utils;
+package com.bestStore.userservice.utils;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.AttributeConverter;

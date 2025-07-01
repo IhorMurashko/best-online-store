@@ -1,6 +1,6 @@
-package com.beststore.userservice.mapper;
+package com.bestStore.userservice.mapper;
 
-import com.beststore.userservice.model.BillingInfo;
+import com.bestStore.userservice.model.BillingInfo;
 import com.common.lib.userModule.userDto.request.BillingInfoUpdateRequestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

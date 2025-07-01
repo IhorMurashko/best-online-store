@@ -1,11 +1,11 @@
-package com.beststore.userservice.services.update;
+package com.bestStore.userservice.services.update;
 
-import com.beststore.userservice.exceptions.ExceptionMessageProvider;
-import com.beststore.userservice.exceptions.UserNotFoundException;
-import com.beststore.userservice.mapper.UpdatableUserInfoMapper;
-import com.beststore.userservice.mapper.UserFullInfoMapper;
-import com.beststore.userservice.model.User;
-import com.beststore.userservice.services.userCrudService.UserCrudService;
+import com.bestStore.userservice.exceptions.ExceptionMessageProvider;
+import com.bestStore.userservice.exceptions.UserNotFoundException;
+import com.bestStore.userservice.mapper.UpdatableUserInfoMapper;
+import com.bestStore.userservice.mapper.UserFullInfoMapper;
+import com.bestStore.userservice.model.User;
+import com.bestStore.userservice.services.userCrudService.UserCrudService;
 import com.common.lib.userModule.userDto.request.UserUpdateRequestDto;
 import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;
 import lombok.RequiredArgsConstructor;
@@ -34,16 +34,12 @@ public class UpdatableUserInfoServiceImpl implements UpdatableUserInfoService {
         );
 
         updatableUserInfoMapper.updateEntityFromDto(userUpdateRequestDto, existingUser);
-
-
         User saved = userCrudService.save(existingUser);
-
         return userFullInfoMapper.toDto(saved);
     }
 
     @Override
     public void deleteUser(@NonNull Long id) {
-
         boolean userExistById = userCrudService.isUserExistById(id);
 
         if (userExistById) {
@@ -54,10 +50,6 @@ public class UpdatableUserInfoServiceImpl implements UpdatableUserInfoService {
             throw new UserNotFoundException(
                     String.format(ExceptionMessageProvider.USER_ID_NOT_FOUND, id)
             );
-
         }
-
-
     }
-
 }

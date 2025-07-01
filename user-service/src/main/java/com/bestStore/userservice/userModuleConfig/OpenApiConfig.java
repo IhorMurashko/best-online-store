@@ -1,4 +1,4 @@
-package com.beststore.userservice.userModuleConfig;
+package com.bestStore.userservice.userModuleConfig;
 
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;

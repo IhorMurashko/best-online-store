@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package dto;
+option java_package = "com.bestStore";
+option java_multiple_files = true;
+
+message User {
+  string firstName = 2;
+  string lastName = 3;
+  string phoneNumber = 4;
+  string country = 5;
+  string city = 6;
+  string streetName = 7;
+  string houseNumber = 8;
+  string zipCode = 9;
+  string authProvider = 10;
+  string oauthId = 11;
+}

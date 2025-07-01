@@ -1,10 +1,10 @@
-package com.beststore.userservice.controllers;
+package com.bestStore.userservice.controllers;
 
 
-import com.beststore.userservice.exceptions.ExceptionMessageProvider;
-import com.beststore.userservice.services.auth.AuthService;
-import com.beststore.userservice.services.update.UpdatableUserInfoService;
-import com.beststore.userservice.services.userCrudService.UserCrudServiceImpl;
+import com.bestStore.userservice.exceptions.ExceptionMessageProvider;
+import com.bestStore.userservice.services.auth.AuthService;
+import com.bestStore.userservice.services.update.UpdatableUserInfoService;
+import com.bestStore.userservice.services.userCrudService.UserCrudServiceImpl;
 import com.common.lib.authModule.authDto.BasicUserAuthenticationResponseDto;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.common.lib.authModule.authDto.OauthRegistrationCredentialsDto;

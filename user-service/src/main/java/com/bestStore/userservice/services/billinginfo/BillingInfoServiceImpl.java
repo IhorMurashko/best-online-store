@@ -1,9 +1,9 @@
-package com.beststore.userservice.services.billinginfo;
+package com.bestStore.userservice.services.billinginfo;
 
-import com.beststore.userservice.exceptions.BillingInfoNotFoundException;
-import com.beststore.userservice.mapper.UpdateBillingInfoMapper;
-import com.beststore.userservice.model.BillingInfo;
-import com.beststore.userservice.repositories.BillingInfoRepository;
+import com.bestStore.userservice.exceptions.BillingInfoNotFoundException;
+import com.bestStore.userservice.mapper.UpdateBillingInfoMapper;
+import com.bestStore.userservice.model.BillingInfo;
+import com.bestStore.userservice.repositories.BillingInfoRepository;
 import com.common.lib.userModule.userDto.request.BillingInfoUpdateRequestDto;
 import java.util.List;
 import java.util.Optional;

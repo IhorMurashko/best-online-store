@@ -1,7 +1,7 @@
-package com.beststore.userservice.mapper;
+package com.bestStore.userservice.mapper;
 
-import com.beststore.userservice.model.User;
-import com.beststore.userservice.utils.UserFieldAdapter;
+import com.bestStore.userservice.model.User;
+import com.bestStore.userservice.utils.UserFieldAdapter;
 import com.common.lib.userModule.userDto.request.UserUpdateRequestDto;
 import org.mapstruct.*;
 

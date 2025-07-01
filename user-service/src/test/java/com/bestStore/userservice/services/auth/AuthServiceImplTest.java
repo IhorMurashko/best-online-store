@@ -1,11 +1,11 @@
-package com.beststore.userservice.services.auth;
+package com.bestStore.userservice.services.auth;
 
-import com.beststore.userservice.exceptions.ExceptionMessageProvider;
-import com.beststore.userservice.exceptions.UserNotFoundException;
-import com.beststore.userservice.mapper.UserFullInfoMapper;
-import com.beststore.userservice.model.User;
-import com.beststore.userservice.services.auth.AuthServiceImpl;
-import com.beststore.userservice.services.userCrudService.UserCrudService;
+import com.bestStore.userservice.exceptions.ExceptionMessageProvider;
+import com.bestStore.userservice.exceptions.UserNotFoundException;
+import com.bestStore.userservice.mapper.UserFullInfoMapper;
+import com.bestStore.userservice.model.User;
+import com.bestStore.userservice.services.auth.AuthServiceImpl;
+import com.bestStore.userservice.services.userCrudService.UserCrudService;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import com.common.lib.exception.InvalidAuthCredentials;

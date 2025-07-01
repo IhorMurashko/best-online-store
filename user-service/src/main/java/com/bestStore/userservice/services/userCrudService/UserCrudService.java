@@ -1,6 +1,6 @@
-package com.beststore.userservice.services.userCrudService;
+package com.bestStore.userservice.services.userCrudService;
 
-import com.beststore.userservice.model.User;
+import com.bestStore.userservice.model.User;
 import org.springframework.lang.NonNull;
 
 import java.util.Optional;

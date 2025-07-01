@@ -1,6 +1,6 @@
-package com.beststore.userservice.exceptionHandler;
+package com.bestStore.userservice.exceptionHandler;
 
-import com.beststore.userservice.exceptions.UserNotFoundException;
+import com.bestStore.userservice.exceptions.UserNotFoundException;
 import com.common.lib.exception.BaseExceptionResponse;
 import com.common.lib.exception.InvalidAuthCredentials;
 import com.common.lib.exception.RequestDoesNotContainsHeader;

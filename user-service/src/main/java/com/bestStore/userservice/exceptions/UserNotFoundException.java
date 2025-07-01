@@ -1,4 +1,4 @@
-package com.beststore.userservice.exceptions;
+package com.bestStore.userservice.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message, Throwable cause) {

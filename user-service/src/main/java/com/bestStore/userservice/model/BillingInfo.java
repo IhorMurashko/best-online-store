@@ -1,6 +1,6 @@
-package com.beststore.userservice.model;
+package com.bestStore.userservice.model;
 
-import com.beststore.userservice.utils.CardNumberEncryptor;
+import com.bestStore.userservice.utils.CardNumberEncryptor;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

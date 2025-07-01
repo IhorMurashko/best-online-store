@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package billing_info_service;
+option java_package = "com.bestStore";
+option java_multiple_files = true;
+
+import "user-service/dto/billing_info.proto";
+import "user-service/common/common.proto";
+
+service BillingInfoService {
+  rpc GetBillingInfoById (common.IdRequest) returns (dto.BillingInfo);
+  rpc CreateBillingInfo (dto.BillingInfo) returns (dto.BillingInfo);
+  rpc UpdateBillingInfo (dto.BillingInfo) returns (dto.BillingInfo);
+  rpc DeleteBillingInfo (common.IdRequest) returns (common.Empty);
+  rpc GetAllBillingByUserId (common.IdRequest) returns (stream dto.BillingInfo);
+}

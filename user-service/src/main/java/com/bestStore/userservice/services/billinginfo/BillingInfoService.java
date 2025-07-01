@@ -1,6 +1,6 @@
-package com.beststore.userservice.services.billinginfo;
+package com.bestStore.userservice.services.billinginfo;
 
-import com.beststore.userservice.model.BillingInfo;
+import com.bestStore.userservice.model.BillingInfo;
 import java.util.List;
 import java.util.Optional;
 
