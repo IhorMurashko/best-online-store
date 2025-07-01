@@ -1,9 +1,6 @@
 package com.beststore.DTO;
 
-import com.beststore.Entity.Brand;
-import com.beststore.Entity.Category;
-import com.beststore.Entity.Image;
-import com.beststore.Entity.Producer;
+import com.beststore.Entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +19,13 @@ public class ProductDTO {
     Double price;
     String description;
     Integer kcal;
-    Brand brand;
-    List<Image> images;
-    Set<Category> categories;
-    Producer producer;
+    BrandDTO brand;
+    Integer quantityInStock;
+    Double rating;
+    Integer ratingCount;
+
+    List<ProductSalesDTO> productSales;
+    List<ImageDTO> images;
+    Set<CategoryDTO> categories;
+    ProducerDTO producer;
 }

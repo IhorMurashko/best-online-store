@@ -20,6 +20,13 @@ public class Product extends Base {
     Double price;
     String description;
     Integer kcal;
+    Integer quantityInStock;
+
+    Double rating;
+    Integer ratingCount;
+
+    @OneToMany
+    List<ProductSales> productSales;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")

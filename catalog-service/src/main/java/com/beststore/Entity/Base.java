@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Base {
+public abstract class Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
