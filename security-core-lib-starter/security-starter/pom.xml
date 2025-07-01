@@ -9,9 +9,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>security-lib-gateway</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>security-starter</artifactId>
     <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
 
 
     <properties>
@@ -20,33 +20,23 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
     <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
-        <!-- Cache -->
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <!-- Filter -->
-        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-gateway -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.beststore</groupId>
             <artifactId>security-lib-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.beststore</groupId>
+            <artifactId>security-lib-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.beststore</groupId>
+            <artifactId>security-lib-gateway</artifactId>
+        </dependency>
+
 
     </dependencies>
+
 
 </project>

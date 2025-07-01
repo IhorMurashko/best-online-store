@@ -49,6 +49,4 @@ public class SecurityCoreAutoConfiguration {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
 return  new BCryptPasswordEncoder();
     }
-
-
 }

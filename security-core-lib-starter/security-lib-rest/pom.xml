@@ -12,6 +12,8 @@
     </parent>
 
     <artifactId>security-lib-rest</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>Security Lib REST</name>
     <description>Spring Boot starter for REST security</description>
 
