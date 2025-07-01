@@ -88,7 +88,7 @@
         <spring-boot-starter-data-redis.redis>3.4.5</spring-boot-starter-data-redis.redis>
         <caffeine.version>3.2.0</caffeine.version>
 
-        <!--<spring-boot-starter-version>3.4.5</spring-boot-starter-version>-->
+        <spring-boot-starter-version>3.4.5</spring-boot-starter-version>
     </properties>
 
     <dependencyManagement>
@@ -279,11 +279,11 @@
                 <version>${caffeine.version}</version>
             </dependency>
 
-            <!--<dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${spring-boot-starter-version}</version>
-            </dependency>-->
+            </dependency>
 
 
         </dependencies>
