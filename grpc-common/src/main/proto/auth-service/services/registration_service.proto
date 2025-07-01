@@ -5,6 +5,6 @@ option java_multiple_files = true;
 import "auth-service/dto/authentication_credentials.proto";
 import "auth-service/dto/result.proto";
 
-service RegistrationServiceGrpc{
+service RegistrationService{
   rpc registration (dto.AuthenticationCredentials) returns(dto.Result);
 }

@@ -32,13 +32,14 @@
 
 
     <properties>
+
         <java.version>17</java.version>
+
         <!-- Web & Validation -->
         <spring-boot-starter-web.version>3.4.5</spring-boot-starter-web.version>
         <spring-boot-starter-actuator.version>3.4.5</spring-boot-starter-actuator.version>
         <spring-boot-starter-validation.version>3.4.5</spring-boot-starter-validation.version>
         <spring-boot-starter-thymeleaf.version>3.4.5</spring-boot-starter-thymeleaf.version>
-
 
         <!-- Open API -->
         <springdoc-openapi-starter-webmvc-ui.version>2.8.6</springdoc-openapi-starter-webmvc-ui.version>
@@ -47,11 +48,9 @@
         <spring-cloud-starter-gateway.version>4.2.2</spring-cloud-starter-gateway.version>
         <spring-cloud.version>2024.0.1</spring-cloud.version>
 
-
         <!-- GRPC server and client  -->
         <grpc-server-spring-boot-starter.version>3.1.0.RELEASE</grpc-server-spring-boot-starter.version>
         <grpc-common.version>0.0.1-SNAPSHOT</grpc-common.version>
-
 
         <!-- DB Migration -->
         <flyway-database-postgresql.version>11.8.2</flyway-database-postgresql.version>
@@ -67,7 +66,7 @@
         <common-dto.version>0.0.1-SNAPSHOT</common-dto.version>
 
         <!-- Security -->
-        <security-core-lib-starter.version>0.0.1-SNAPSHOT</security-core-lib-starter.version>
+        <security-starter.version>0.0.1-SNAPSHOT</security-starter.version>
 
         <!-- DevTools (runtime only) -->
         <spring-boot-devtools.version>3.4.5</spring-boot-devtools.version>
@@ -205,15 +204,6 @@
                 <version>${common-dto.version}</version>
             </dependency>
 
-            <!-- Security -->
-            <dependency>
-                <groupId>com.beststore</groupId>
-                <artifactId>security-core-lib-starter</artifactId>
-                <version>${security-core-lib-starter.version}</version>
-            </dependency>
-
-
-
             <!-- DevTools (runtime only) -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -277,6 +267,12 @@
                 <version>${caffeine.version}</version>
             </dependency>
 
+            <!-- Security -->
+            <dependency>
+                <groupId>com.beststore</groupId>
+                <artifactId>security-starter</artifactId>
+                <version>${security-starter.version}</version>
+            </dependency>
 
 
         </dependencies>

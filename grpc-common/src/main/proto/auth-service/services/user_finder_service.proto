@@ -7,7 +7,7 @@ import "auth-service/dto/authentication_credentials.proto";
 import "auth-service/dto/get_user_by.proto";
 
 
-service UserFinderServiceGrpc {
+service UserFinderService {
   rpc getByEmail (dto.ByEmail) returns (dto.UserCredentials){}
   rpc getById(dto.ById) returns (dto.UserCredentials);
 }
