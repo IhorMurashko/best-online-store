@@ -18,12 +18,11 @@ public class CatalogController {
 
     private final CatalogService catalogService;
 
-//    @GetMapping()
-//    public List<ProductDTO> getAllProduct(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size,
-//
-//    ) {
-//        return catalogService.getAllProduct();
-//    }
+@GetMapping()
+public List<ProductDTO> getAllProduct(
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "24") int size)
+    {
+        return catalogService.getAllProductPageable();
+    }
 }

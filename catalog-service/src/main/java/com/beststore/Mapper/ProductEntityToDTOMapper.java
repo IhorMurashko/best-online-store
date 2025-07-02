@@ -22,6 +22,7 @@ public class ProductEntityToDTOMapper implements BaseMapper<Product, ProductDTO>
                 .id(obj.getId())
                 .productName(obj.getProductName())
                 .description(obj.getDescription())
+                .price(obj.getPrice())
                 .kcal(obj.getKcal())
                 .brand(
                         brandEntityToDTOMapper.map(obj.getBrand())

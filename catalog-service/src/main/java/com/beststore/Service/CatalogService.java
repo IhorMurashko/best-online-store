@@ -20,8 +20,10 @@ public class CatalogService {
         return catalogRepository.findAll().stream().map(productEntityToDTOMapper::map).toList();
     }
 
-//    public ProductDTO getAllProductPageable()
-//    {
-//        List<ProductDTO> allProduct = getAllProduct();
-//    }
+    public List<ProductDTO> getAllProductPageable()
+    {
+        List<ProductDTO> allProduct = getAllProduct();
+
+
+    }
 }

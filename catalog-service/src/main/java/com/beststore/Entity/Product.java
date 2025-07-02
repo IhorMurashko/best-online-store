@@ -25,7 +25,7 @@ public class Product extends Base {
     Double rating;
     Integer ratingCount;
 
-    @OneToMany
+    @OneToMany(mappedBy = "product")
     List<ProductSales> productSales;
 
     @ManyToOne
@@ -36,7 +36,12 @@ public class Product extends Base {
     @JsonManagedReference
     List<Image> images;
 
-    @ManyToMany(mappedBy = "product")
+    @ManyToMany()
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     Set<Category> categories;
 
     @ManyToOne

@@ -15,5 +15,4 @@ public class CategoryDTO {
 
     String category_name;
 
-    List<ProductDTO> product;
 }

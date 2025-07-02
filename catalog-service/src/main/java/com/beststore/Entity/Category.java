@@ -3,7 +3,6 @@ package com.beststore.Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.util.List;
@@ -16,9 +15,9 @@ import java.util.List;
 @Builder
 public class Category extends Base {
 
-    String category_name;
+    String categoryName;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "categories")
     List<Product> product;
 
 }

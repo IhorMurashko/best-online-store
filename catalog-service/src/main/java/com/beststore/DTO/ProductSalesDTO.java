@@ -1,6 +1,7 @@
 package com.beststore.DTO;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +16,7 @@ import java.time.LocalDateTime;
 public class ProductSalesDTO {
     Long productId;
     Integer quantity;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime saleDate;
 }
