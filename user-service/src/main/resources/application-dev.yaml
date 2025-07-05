@@ -13,21 +13,17 @@ spring:
       enabled: true
       path: /h2-console
 
-grpc:
-  server:
-    port: 9092
-
 encryption:
   secret: 1234567890abcdef
-
-logging:
-  level:
-    root: DEBUG # всё приложение в режиме DEBUG
-    org.springframework: INFO # можно оставить INFO, иначе много шума
-    org.springframework.boot.autoconfigure: INFO # покажет, какие автоконфигурации включаются
-    org.springframework.cloud.gateway: DEBUG # логика Gateway
-    org.springframework.data.redis: DEBUG # Redis-соединения
-    io.lettuce.core: WARN # понижаем шум от клиента Redis (или DEBUG, если нужно)
-    com.bestStore: DEBUG # твой код
-    sun: info
-    javax.management: info
+#
+#logging:
+#  level:
+#    root: DEBUG # всё приложение в режиме DEBUG
+#    org.springframework: INFO # можно оставить INFO, иначе много шума
+#    org.springframework.boot.autoconfigure: INFO # покажет, какие автоконфигурации включаются
+#    org.springframework.cloud.gateway: DEBUG # логика Gateway
+#    org.springframework.data.redis: DEBUG # Redis-соединения
+#    io.lettuce.core: WARN # понижаем шум от клиента Redis (или DEBUG, если нужно)
+#    com.bestStore: DEBUG # твой код
+#    sun: info
+#    javax.management: info
