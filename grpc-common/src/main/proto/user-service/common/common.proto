@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package common;
+option java_package = "com.bestStore.common";
+option java_multiple_files = true;
+
+message IdRequest {
+  string id = 1;
+}
+
+message Empty {}
