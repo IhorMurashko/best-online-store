@@ -95,7 +95,7 @@
         <!-- Security -->
         <dependency>
             <groupId>com.beststore</groupId>
-            <artifactId>security-starter</artifactId>
+            <artifactId>security-lib-rest</artifactId>
         </dependency>
 
     </dependencies>

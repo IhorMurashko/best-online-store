@@ -3,9 +3,15 @@ package com.bestStore.authService.services.registration;
 import com.bestStore.AuthenticationCredentials;
 import com.bestStore.Result;
 import com.bestStore.auth.RegistrationServiceGrpc;
+import com.bestStore.authService.constatnts.GrpcClientConstant;
 import com.bestStore.authService.exceptions.ExceptionConstantMessage;
 import com.bestStore.authService.exceptions.exception.CredentialsException;
 import com.bestStore.authService.exceptions.utils.StatusRuntimeExceptionToRuntimeExceptionConvertor;
+import com.bestStore.authService.services.notification.NotificationSenderService;
+import com.bestStore.authService.utils.NotificationLetterBuilder;
+import com.bestStore.notification.Letter;
+import com.bestStore.notification.NotificationChannel;
+import com.bestStore.notification.NotificationType;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;
 import io.grpc.StatusRuntimeException;
 import jakarta.validation.Valid;
@@ -27,8 +33,10 @@ import java.util.concurrent.TimeUnit;
 public class RegistrationServiceImpl implements RegistrationService {
 
     private final BCryptPasswordEncoder cryptPasswordEncoder;
+    private final NotificationSenderService notificationSenderService;
 
-    @GrpcClient("user-service")
+
+    @GrpcClient(GrpcClientConstant.USER_GRPC_CLIENT_NAME)
     private RegistrationServiceGrpc.RegistrationServiceBlockingStub serviceBlockingStub;
 
     private RegistrationServiceGrpc.RegistrationServiceBlockingStub stub() {
@@ -37,7 +45,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 
     @Override
-    public boolean registration(@NonNull @Valid RegistrationCredentialsDto registrationCredentialsDto) {
+    public void registration(@NonNull @Valid RegistrationCredentialsDto registrationCredentialsDto) {
 
         if (!Objects.equals(registrationCredentialsDto.password(), registrationCredentialsDto.confirmationPassword())) {
             log.error("Passwords do not match");
@@ -47,10 +55,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         String crypdedPassword = cryptPasswordEncoder.encode(registrationCredentialsDto.password());
         log.debug("Password encoded successfully");
 
-        boolean result = false;
         try {
             AuthenticationCredentials registrationRequest = AuthenticationCredentials.newBuilder()
-                    .setEmail(registrationCredentialsDto.email())
+                    .setEmail(registrationCredentialsDto.email().toLowerCase())
                     .setPassword(crypdedPassword)
                     .build();
 
@@ -59,15 +66,20 @@ public class RegistrationServiceImpl implements RegistrationService {
             Result registration = stub().registration(registrationRequest);
             log.debug("Registration result: {}", registration);
 
-            result = registration.getResult();
+
+            Letter congratiolationRegistrationLetter = NotificationLetterBuilder
+                    .builder(NotificationType.REGISTRATION,
+                            NotificationChannel.EMAIL,
+                            registrationRequest.getEmail(),
+                            "welcome ot our store",
+                            null);
+
+//            notificationSenderService.sendNotification(congratiolationRegistrationLetter, true);
+
         } catch (StatusRuntimeException ex) {
             log.warn("gRPC call failed: {}", ex.getStatus(), ex);
-
             throw StatusRuntimeExceptionToRuntimeExceptionConvertor
                     .convert(ex);
         }
-
-        //todo: send congratulation latter
-        return result;
     }
 }

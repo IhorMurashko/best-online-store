@@ -1,6 +1,10 @@
-server:
-  port: 8081
-#30 min
+spring:
+  profiles:
+    active: dev
+  application:
+    name: auth-service
+
+  #30 min
 accessTokenAvailableValidityPeriodInSec: 1800
 #30 days
 refreshTokenAvailableValidityPeriodInSec: 2592000
@@ -9,4 +13,3 @@ security-lib:
   refresh-token:
     mode:
       allowed-refresh-access: false
-

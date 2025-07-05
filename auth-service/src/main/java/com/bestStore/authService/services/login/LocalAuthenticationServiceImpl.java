@@ -3,6 +3,7 @@ package com.bestStore.authService.services.login;
 import com.bestStore.ByEmail;
 import com.bestStore.UserCredentials;
 import com.bestStore.auth.UserFinderServiceGrpc;
+import com.bestStore.authService.constatnts.GrpcClientConstant;
 import com.bestStore.authService.exceptions.ExceptionConstantMessage;
 import com.bestStore.authService.exceptions.exception.CredentialsException;
 import com.bestStore.authService.exceptions.exception.UserAccountIsNotAvailableException;
@@ -39,11 +40,12 @@ public class LocalAuthenticationServiceImpl implements AuthenticationService {
 
     @Value("${refreshTokenAvailableValidityPeriodInSec}")
     private Long refreshTokenAvailableValidityPeriodInSec;
+
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    @GrpcClient("user-service")
-    private final UserFinderServiceGrpc.UserFinderServiceBlockingStub userFinderServiceBlockingStub;
+    @GrpcClient(value = GrpcClientConstant.USER_GRPC_CLIENT_NAME)
+    private UserFinderServiceGrpc.UserFinderServiceBlockingStub userFinderServiceBlockingStub;
 
     private UserFinderServiceGrpc.UserFinderServiceBlockingStub stub() {
         return userFinderServiceBlockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
@@ -99,6 +101,11 @@ public class LocalAuthenticationServiceImpl implements AuthenticationService {
                 || !credentials.getIsCredentialsNonExpired()
                 || !credentials.getIsEnabled()) {
 
+            log.warn("account non expired {}", credentials.getIsAccountNonExpired());
+            log.warn("account non locked {}", credentials.getIsAccountNonLocked());
+            log.warn("account credentials non expired {}", credentials.getIsCredentialsNonExpired());
+            log.warn("account credentials is enabled {}", credentials.getIsEnabled());
+
             log.warn("account is expired for user: {}", loginCredentialsDto.email());
 
             throw new UserAccountIsNotAvailableException(
@@ -120,6 +127,7 @@ public class LocalAuthenticationServiceImpl implements AuthenticationService {
                 claims,
                 TokenType.ACCESS);
         log.debug("accessToken was created");
+
         String refreshTokenToken = jwtTokenProvider.generateToken(
                 credentials.getId(),
                 refreshTokenAvailableValidityPeriodInSec,
