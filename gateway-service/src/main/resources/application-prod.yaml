@@ -1,5 +1,0 @@
-services:
-  test-service:
-    path: https://test-lsys.onrender.com
-server:
-  port: 8080
