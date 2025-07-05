@@ -24,15 +24,11 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public record SecurityKeysProperties(
 
-
         @NotNull
         @Size(min = 32, max = 256, message = "Secret key must be between 32 and 256 characters long")
         String internal,
 
-
         @NotNull
         @Size(min = 32, max = 256, message = "Secret key must be between 32 and 256 characters long")
         String jwt) {
-
-
 }

@@ -4,7 +4,6 @@ import com.bestStore.userservice.exceptions.ExceptionMessageProvider;
 import com.bestStore.userservice.exceptions.UserNotFoundException;
 import com.bestStore.userservice.mapper.UserFullInfoMapper;
 import com.bestStore.userservice.model.User;
-import com.bestStore.userservice.services.auth.AuthServiceImpl;
 import com.bestStore.userservice.services.userCrudService.UserCrudService;
 import com.common.lib.authModule.authDto.LoginCredentialsDto;
 import com.common.lib.authModule.authDto.RegistrationCredentialsDto;

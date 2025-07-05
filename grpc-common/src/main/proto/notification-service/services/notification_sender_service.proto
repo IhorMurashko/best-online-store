@@ -1,0 +1,11 @@
+syntax = "proto3";
+package notification;
+option java_package = "com.bestStore.notification";
+option java_multiple_files = true;
+import "notification-service/dto/registration_letter.proto";
+import "auth-service/dto/result.proto";
+
+
+service NotificationService{
+  rpc send (dto.Letter) returns(dto.Result);
+}

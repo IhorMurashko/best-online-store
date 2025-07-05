@@ -28,13 +28,11 @@ import java.util.Set;
 
 @Tag(name = "user cart controller",
         description = "CRUD operations for the carts.")
-
 @RestController
 @RequestMapping("/api/v1/cart")
 @RequiredArgsConstructor
 @Validated
 public class CartController {
-
 
     private final CartService cartService;
 

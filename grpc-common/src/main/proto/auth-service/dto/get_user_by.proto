@@ -1,0 +1,11 @@
+syntax = "proto3";
+package dto;
+option java_package = "com.bestStore";
+option java_multiple_files = true;
+
+message  ByEmail{
+  string email = 1;
+}
+message ById{
+  int64 id = 1;
+}

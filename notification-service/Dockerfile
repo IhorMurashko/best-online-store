@@ -5,7 +5,6 @@ WORKDIR /app
 
 # Копируем ВЕСЬ проект
 COPY . .
-COPY target/eureka-service-registry-*.jar /app.jar
 
 # Сборка нужного модуля с зависимостями
 RUN mvn clean package -pl notification-service -am -Pprod -DskipTests -Dmaven.test.skip=true
@@ -19,6 +18,5 @@ WORKDIR /app
 COPY --from=builder /app/notification-service/target/*.jar app.jar
 
 ENV SPRING_PROFILES_ACTIVE=prod
-#EXPOSE 8080
 EXPOSE 8090
 ENTRYPOINT ["java", "-jar", "app.jar"]

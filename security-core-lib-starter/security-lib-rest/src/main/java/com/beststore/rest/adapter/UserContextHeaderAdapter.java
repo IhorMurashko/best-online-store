@@ -5,14 +5,13 @@ import com.bestStore.core.exceptions.ExceptionMessageConstants;
 import com.bestStore.core.exceptions.claimsException.HeaderClaimException;
 import com.bestStore.core.headerHandling.HeaderAdapter;
 import com.beststore.rest.context.dto.UserContext;
+import com.beststore.rest.utils.RolesParserUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Adapter that converts an {@link HttpServletRequest} into a {@link UserContext}
@@ -60,11 +59,7 @@ public class UserContextHeaderAdapter implements HeaderAdapter<UserContext, Http
             );
         }
 
-        Set<SimpleGrantedAuthority> userRoles = Arrays.stream(roles.split(","))
-                .map(String::trim)
-                .filter(r -> !r.isBlank())
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.collectingAndThen(Collectors.toSet(), Set::copyOf));
+        Set<SimpleGrantedAuthority> userRoles = RolesParserUtil.getRolesListFromString(roles);
 
         return new UserContext(userId, username, userRoles);
     }

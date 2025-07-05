@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  profiles:
+    active: dev
+
+#logging:
+#  level:
+#    root: DEBUG # всё приложение в режиме DEBUG
+#    org.springframework: INFO # можно оставить INFO, иначе много шума
+#    org.springframework.boot.autoconfigure: DEBUG # покажет, какие автоконфигурации включаются
+#    org.springframework.cloud.gateway: DEBUG # логика Gateway
+#    org.springframework.data.redis: DEBUG # Redis-соединения
+#    io.lettuce.core: WARN # понижаем шум от клиента Redis (или DEBUG, если нужно)
+#    com.bestStore: DEBUG # твой код
+#    sun: info
+#    javax.management: info
+#  pattern:
+#    console: "%d{HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
+

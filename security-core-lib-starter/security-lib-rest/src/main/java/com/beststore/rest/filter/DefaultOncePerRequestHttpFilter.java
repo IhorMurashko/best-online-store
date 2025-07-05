@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 /**
  * Custom {@link OncePerRequestFilter} for REST microservices that validates request headers
  * and builds Spring Security's {@link Authentication} context from user context.
@@ -54,14 +55,14 @@ import java.util.stream.Collectors;
 public class DefaultOncePerRequestHttpFilter extends OncePerRequestFilter {
     private final Logger log = LoggerFactory.getLogger(DefaultOncePerRequestHttpFilter.class);
 
-    private final String internalSecretKey;
+    private final String currentIinternalSecretKey;
     private final HeaderAdapter<UserContext, HttpServletRequest> userContextHeaderAdapter;
     private final RestTokenModeProperties tokenMode;
 
     public DefaultOncePerRequestHttpFilter(SecurityKeysProperties securityKeysProperties,
                                            HeaderAdapter<UserContext, HttpServletRequest> userContextHeaderAdapter,
                                            RestTokenModeProperties tokenMode) {
-        this.internalSecretKey = securityKeysProperties.internal();
+        this.currentIinternalSecretKey = securityKeysProperties.internal();
         this.userContextHeaderAdapter = userContextHeaderAdapter;
         this.tokenMode = tokenMode;
     }
@@ -76,11 +77,12 @@ public class DefaultOncePerRequestHttpFilter extends OncePerRequestFilter {
         );
 
         try {
-            String internalSecret = request.getHeader(HeadersConstants.HEADER_INTERNAL_SECRET);
+            String requestInternalSecret = request.getHeader(HeadersConstants.HEADER_INTERNAL_SECRET);
 
 
-            if (!internalSecretKey.equals(internalSecret)) {
-                log.warn("Invalid internal secret: {}", internalSecret);
+            if (!currentIinternalSecretKey.equals(requestInternalSecret)) {
+                log.warn("Invalid internal secret: {}", requestInternalSecret);
+
                 respondUnauthorized(response, "Invalid internal secret");
                 return;
             }

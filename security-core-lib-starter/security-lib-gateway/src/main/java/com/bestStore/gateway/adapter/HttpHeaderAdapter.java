@@ -1,20 +1,16 @@
 package com.bestStore.gateway.adapter;
 
+import com.bestStore.core.claims.ClaimsProvider;
 import com.bestStore.core.constants.HeadersConstants;
 import com.bestStore.core.constants.TokenClaimsConstants;
 import com.bestStore.core.exceptions.ExceptionMessageConstants;
 import com.bestStore.core.exceptions.claimsException.JwtClaimsException;
 import com.bestStore.core.headerHandling.HeaderAdapter;
-import com.bestStore.gateway.claims.ClaimsProvider;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -75,9 +71,20 @@ public class HttpHeaderAdapter implements HeaderAdapter<HttpHeaders, String> {
                         } else {
                             return Set.of(roleString);
                         }
-                    } else if (raw instanceof Collection) {
-                        return objectMapper.convertValue(raw, new TypeReference<Set<String>>() {
-                        });
+                    } else if (raw instanceof Collection<?> rawCollection) {
+                        Set<String> roles = rawCollection.stream()
+                                .filter(Objects::nonNull)
+                                .map(roleObj -> {
+                                    if (roleObj instanceof Map<?, ?> roleMap) {
+                                        Object authority = roleMap.get("authority");
+                                        if (authority instanceof String str) {
+                                            return str;
+                                        }
+                                    }
+                                    throw new IllegalArgumentException("Unexpected role object: " + roleObj);
+                                })
+                                .collect(Collectors.toSet());
+                        return roles;
                     } else {
                         throw new IllegalArgumentException("Unexpected type for roles claim: " + raw.getClass());
                     }

@@ -1,0 +1,11 @@
+syntax = "proto3";
+package dto;
+option java_package = "com.bestStore.notification";
+option java_multiple_files = true;
+
+enum NotificationChannel{
+  EMAIL = 0;
+  SMS = 1;
+  PUSH = 2;
+}
+

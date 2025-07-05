@@ -30,7 +30,6 @@
                     <artifactId>spring-boot-devtools</artifactId>
                     <scope>runtime</scope>
                     <optional>true</optional>
-                    <version>${spring-boot-devtools.version}</version>
                 </dependency>
 
             </dependencies>
@@ -65,17 +64,6 @@
 
     <dependencies>
 
-        <!-- Web & Validation -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
 
         <!-- JUnit 5 -->
         <dependency>
@@ -104,13 +92,6 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- Open API -->
-        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        </dependency>
-
 
         <!-- Utils -->
         <dependency>
@@ -130,7 +111,6 @@
         <dependency>
             <groupId>com.beststore</groupId>
             <artifactId>common-dto</artifactId>
-            <version>${common-dto.version}</version>
         </dependency>
 
 
@@ -140,6 +120,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beststore</groupId>
+            <artifactId>grpc-common</artifactId>
         </dependency>
 
     </dependencies>

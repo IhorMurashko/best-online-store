@@ -1,0 +1,13 @@
+grpc:
+  client:
+    user-service:
+      address: ${user-service-grpc-address}
+      negotiation-type: plaintext
+security-lib:
+  refresh-token:
+    mode:
+      allowed-refresh-access: false
+  secret:
+    key:
+      internal: ${INTERNAL_SECRET_KEY}
+      jwt: ${JWT_SECRET_KEY}

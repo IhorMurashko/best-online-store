@@ -1,0 +1,13 @@
+syntax = "proto3";
+package auth;
+option java_package = "com.bestStore.auth";
+option java_multiple_files = true;
+import "auth-service/dto/user_credentials.proto";
+import "auth-service/dto/authentication_credentials.proto";
+import "auth-service/dto/get_user_by.proto";
+
+
+service UserFinderService {
+  rpc getByEmail (dto.ByEmail) returns (dto.UserCredentials){}
+  rpc getById(dto.ById) returns (dto.UserCredentials);
+}

@@ -17,7 +17,6 @@ import com.common.lib.userModule.userDto.response.BasicUserInfoResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +29,7 @@ import java.util.Set;
 public class AuthServiceImpl implements AuthService {
 
     private final UserCrudService userCrudService;
-    private final PasswordEncoder passwordEncoder;
+    //    private final PasswordEncoder passwordEncoder;
     private final UserFullInfoMapper userFullInfoMapper;
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
@@ -112,21 +111,21 @@ public class AuthServiceImpl implements AuthService {
                 ))
         );
 
-        boolean matches = passwordEncoder.matches(
-                loginCredentials.password(), user.getPassword());
-
-        if (matches) {
-
-            return userFullInfoMapper.toDto(user);
-
-        } else {
-            log.error("Invalid credentials for authentication");
-
-            throw new InvalidAuthCredentials(String.format(
-                    ExceptionMessageProvider.INVALID_CREDENTIALS
-            ));
-        }
-
+//        boolean matches = passwordEncoder.matches(
+//                loginCredentials.password(), user.getPassword());
+//
+//        if (matches) {
+//
+//            return userFullInfoMapper.toDto(user);
+//
+//        } else {
+//            log.error("Invalid credentials for authentication");
+//
+//            throw new InvalidAuthCredentials(String.format(
+//                    ExceptionMessageProvider.INVALID_CREDENTIALS
+//            ));
+//        }
+        return null;
     }
 
     @Override

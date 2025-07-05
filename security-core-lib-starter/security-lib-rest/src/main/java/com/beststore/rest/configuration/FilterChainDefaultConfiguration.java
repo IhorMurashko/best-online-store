@@ -1,5 +1,6 @@
 package com.beststore.rest.configuration;
 
+import com.beststore.rest.customizer.SecurityCustomizer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.List;
+
 /**
  * Configures the default Spring Security filter chain for REST microservices.
  *
@@ -44,19 +46,21 @@ public class FilterChainDefaultConfiguration {
     private final AccessDeniedHandler accessDeniedHandler;
     private final AuthenticationEntryPoint authenticationEntryPoint;
     private final OncePerRequestFilter defaultOnePerRequestHttpFilter;
+    private final List<SecurityCustomizer> customizers;
 
     public FilterChainDefaultConfiguration(AccessDeniedHandler accessDeniedHandler,
                                            AuthenticationEntryPoint authenticationEntryPoint,
-                                           OncePerRequestFilter defaultOnePerRequestHttpFilter) {
+                                           OncePerRequestFilter defaultOnePerRequestHttpFilter, List<SecurityCustomizer> customizers) {
         this.accessDeniedHandler = accessDeniedHandler;
         this.authenticationEntryPoint = authenticationEntryPoint;
         this.defaultOnePerRequestHttpFilter = defaultOnePerRequestHttpFilter;
+        this.customizers = customizers;
     }
 
     @Bean
     @ConditionalOnMissingBean(SecurityFilterChain.class)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+        http
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     config.setAllowedOriginPatterns(List.of("*"));
@@ -73,7 +77,14 @@ public class FilterChainDefaultConfiguration {
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(authenticationEntryPoint)
                         .accessDeniedHandler(accessDeniedHandler))
-                .addFilterBefore(defaultOnePerRequestHttpFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .addFilterBefore(defaultOnePerRequestHttpFilter, UsernamePasswordAuthenticationFilter.class);
+
+        if (customizers != null) {
+            for (SecurityCustomizer customizer : customizers) {
+                customizer.customize(http);
+            }
+        }
+
+        return http.build();
     }
 }

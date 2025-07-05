@@ -3,6 +3,7 @@ package com.bestStore.userservice.model;
 import com.common.lib.userModule.AuthProvider.AuthProvider;
 import com.common.lib.userModule.roles.Role;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -83,6 +84,7 @@ public abstract class AbstractBasicUser {
      * For example: LOCAL, GOOGLE, GITHUB.
      */
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     protected AuthProvider authProvider;
 
     /**
