@@ -1,9 +1,12 @@
 spring:
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-
+    #    url: ${DB_URL}
+    #    username: ${DB_USER}
+    #    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://ep-floral-mouse-a908auc5-pooler.gwc.azure.neon.tech/neondb?sslmode=require&channelBinding=require
+    username: neondb_owner
+    password: npg_eAF6PoSg3DIR
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: validate
@@ -14,3 +17,18 @@ spring:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
+
+encryption:
+  #  secret: ${ENCRYPTION_SECRET}
+  secret: 1234567890abcdef
+#logging:
+#  level:
+#    root: DEBUG # всё приложение в режиме DEBUG
+#    org.springframework: INFO # можно оставить INFO, иначе много шума
+#    org.springframework.boot.autoconfigure: INFO # покажет, какие автоконфигурации включаются
+#    org.springframework.cloud.gateway: DEBUG # логика Gateway
+#    org.springframework.data.redis: DEBUG # Redis-соединения
+#    io.lettuce.core: WARN # понижаем шум от клиента Redis (или DEBUG, если нужно)
+#    com.bestStore: DEBUG # твой код
+#    sun: info
+#    javax.management: info
