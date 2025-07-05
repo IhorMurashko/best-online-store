@@ -14,5 +14,5 @@ import java.util.List;
 public class CategoryDTO {
 
     String category_name;
-
+    String image;
 }

@@ -29,7 +29,6 @@ public class CatalogController {
         return catalogService.getAllProduct();
     }
 
-
     @PostMapping("/filter")
     public Page<ProductDTO> getAllProduct(
             @RequestBody(required = false) ProductFilterRequest productFilterRequest)
@@ -39,7 +38,6 @@ public class CatalogController {
 
     @GetMapping("/category")
     public List<CategoryDTO> getAllCategory() {
-        //TODO Дописать в сущность Images.
         return categoryService.getAllCategory();
     }
 

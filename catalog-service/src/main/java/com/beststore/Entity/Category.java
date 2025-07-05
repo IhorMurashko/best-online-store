@@ -20,4 +20,5 @@ public class Category extends Base {
     @ManyToMany(mappedBy = "categories")
     List<Product> product;
 
+    String image;
 }

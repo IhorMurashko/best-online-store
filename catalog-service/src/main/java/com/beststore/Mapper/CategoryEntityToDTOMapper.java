@@ -10,6 +10,7 @@ public class CategoryEntityToDTOMapper implements BaseMapper<Category, CategoryD
     public CategoryDTO map(Category obj) {
         return CategoryDTO.builder()
                 .category_name(obj.getCategoryName())
+                .image(obj.getImage())
                 .build();
     }
 }
