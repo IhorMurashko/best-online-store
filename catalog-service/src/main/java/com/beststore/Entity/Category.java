@@ -1,8 +1,6 @@
 package com.beststore.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -13,8 +11,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "category")
 public class Category extends Base {
 
+    @Column(name = "category_name")
     String categoryName;
 
     @ManyToMany(mappedBy = "categories")
