@@ -16,7 +16,6 @@
         <module>security-lib-gateway</module>
         <module>security-lib-core</module>
         <module>security-lib-rest</module>
-        <module>security-starter</module>
     </modules>
 
     <groupId>com.beststore</groupId>

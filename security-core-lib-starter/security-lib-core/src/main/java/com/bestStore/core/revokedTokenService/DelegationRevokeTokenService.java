@@ -1,6 +1,6 @@
-package com.bestStore.gateway.revokedTokenService;
+package com.bestStore.core.revokedTokenService;
 
-import com.bestStore.gateway.revokedTokenService.tokenCache.RevokedTokenCache;
+import com.bestStore.core.revokedTokenService.tokenCache.RevokedTokenCache;
 import org.springframework.lang.NonNull;
 /**
  * Default implementation of {@link RevokeTokenService} that delegates token storage and lookup

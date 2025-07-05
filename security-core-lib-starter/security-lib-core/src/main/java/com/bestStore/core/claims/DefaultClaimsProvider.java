@@ -1,4 +1,4 @@
-package com.bestStore.gateway.claims;
+package com.bestStore.core.claims;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

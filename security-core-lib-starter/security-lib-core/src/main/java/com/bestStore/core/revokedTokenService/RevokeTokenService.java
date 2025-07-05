@@ -1,4 +1,4 @@
-package com.bestStore.gateway.revokedTokenService;
+package com.bestStore.core.revokedTokenService;
 
 import org.springframework.lang.NonNull;
 /**

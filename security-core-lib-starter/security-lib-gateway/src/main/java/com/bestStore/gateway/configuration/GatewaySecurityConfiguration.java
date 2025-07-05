@@ -4,22 +4,16 @@ import com.bestStore.core.headerHandling.HeaderAdapter;
 import com.bestStore.core.jwtProvider.JwtTokenProvider;
 import com.bestStore.core.properties.SecurityKeysProperties;
 import com.bestStore.gateway.adapter.HttpHeaderAdapter;
-import com.bestStore.gateway.claims.ClaimsProvider;
-import com.bestStore.gateway.claims.DefaultClaimsProvider;
+import com.bestStore.core.claims.ClaimsProvider;
 import com.bestStore.gateway.filter.GatewayAuthenticationFilter;
-import com.bestStore.gateway.revokedTokenService.DelegationRevokeTokenService;
-import com.bestStore.gateway.revokedTokenService.RevokeTokenService;
-import com.bestStore.gateway.revokedTokenService.tokenCache.RedisRevokeToken;
-import com.bestStore.gateway.revokedTokenService.tokenCache.RevokedTokenCache;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import com.bestStore.core.revokedTokenService.RevokeTokenService;
+import com.bestStore.core.revokedTokenService.tokenCache.RevokedTokenCache;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpHeaders;
 
-import javax.crypto.SecretKey;
 /**
  * Auto-configuration class for enabling gateway-specific security features.
  *
@@ -62,23 +56,23 @@ public class GatewaySecurityConfiguration {
         return new HttpHeaderAdapter(claimsProvider);
     }
 
-    @Bean
-    @ConditionalOnMissingBean(DelegationRevokeTokenService.class)
-    public RevokeTokenService delegationRevokeTokenService(RevokedTokenCache revokedTokenCache) {
-        return new DelegationRevokeTokenService(revokedTokenCache);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(RevokedTokenCache.class)
-    @ConditionalOnClass(StringRedisTemplate.class)
-    public RevokedTokenCache redisRevokeToken(StringRedisTemplate redisTemplate, ClaimsProvider claimsProvider) {
-        return new RedisRevokeToken(redisTemplate, claimsProvider);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(ClaimsProvider.class)
-    public ClaimsProvider defaultClaimsProvider(SecretKey jwtKey) {
-        return new DefaultClaimsProvider(jwtKey);
-    }
+//    @Bean
+//    @ConditionalOnMissingBean(DelegationRevokeTokenService.class)
+//    public RevokeTokenService delegationRevokeTokenService(RevokedTokenCache revokedTokenCache) {
+//        return new DelegationRevokeTokenService(revokedTokenCache);
+//    }
+//
+//    @Bean
+//    @ConditionalOnMissingBean(RevokedTokenCache.class)
+//    @ConditionalOnClass(StringRedisTemplate.class)
+//    public RevokedTokenCache redisRevokeToken(StringRedisTemplate redisTemplate, ClaimsProvider claimsProvider) {
+//        return new RedisRevokeToken(redisTemplate, claimsProvider);
+//    }
+//
+//    @Bean
+//    @ConditionalOnMissingBean(ClaimsProvider.class)
+//    public ClaimsProvider defaultClaimsProvider(SecretKey jwtKey) {
+//        return new DefaultClaimsProvider(jwtKey);
+//    }
 
 }

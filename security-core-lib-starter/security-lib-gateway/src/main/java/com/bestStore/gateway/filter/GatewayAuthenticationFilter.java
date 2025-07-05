@@ -5,9 +5,8 @@ import com.bestStore.core.exceptions.ExceptionMessageConstants;
 import com.bestStore.core.headerHandling.HeaderAdapter;
 import com.bestStore.core.jwtProvider.JwtTokenProvider;
 import com.bestStore.core.properties.SecurityKeysProperties;
-import com.bestStore.core.utils.TokenRedisKeyUtil;
+import com.bestStore.core.revokedTokenService.RevokeTokenService;
 import com.bestStore.gateway.exception.WebfluxExceptionResponseStatusBuilder;
-import com.bestStore.gateway.revokedTokenService.RevokeTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -21,6 +20,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
+
 /**
  * Global WebFlux filter for API Gateway that handles JWT-based authentication.
  *
@@ -49,6 +49,7 @@ import java.util.UUID;
  * </p>
  *
  * <p>
+ *
  * @author Ihor Murashko
  * </p>
  */
@@ -79,13 +80,12 @@ public class GatewayAuthenticationFilter implements GlobalFilter {
         final String authHeader = request.getHeaders().getFirst(HeadersConstants.HEADER_AUTHENTICATION);
         log.debug("gateway filter: auth header: {}", authHeader);
 
-//        HttpHeaders newHeaders = new HttpHeaders();
         MultiValueMap<String, String> newHeaders = new LinkedMultiValueMap<>();
 
         newHeaders.set(HeadersConstants.HEADER_INTERNAL_SECRET, securityKeysProperties.internal());
         newHeaders.set(HeadersConstants.HEADER_REQUEST_TOKEN_ID, UUID.randomUUID().toString());
         log.debug("gateway filter: set internal secret and request id");
-        newHeaders.forEach((k,v)->log.debug("OUT HEADER: {} = {}", k, v));
+        newHeaders.forEach((k, v) -> log.debug("OUT HEADER: {} = {}", k, v));
 
         if (authHeader == null || !authHeader.startsWith(HeadersConstants.BEARER_PREFIX)) {
             log.info("Request without token");
@@ -102,7 +102,7 @@ public class GatewayAuthenticationFilter implements GlobalFilter {
 
         final String token = authHeader.substring(7);
 
-        if (delegationRevokeTokenService.isTokenRevoked(TokenRedisKeyUtil.generateBase64RedisKey(token))) {
+        if (delegationRevokeTokenService.isTokenRevoked(token)) {
             log.warn("Attempt with revoked token: {}", token);
 
             return WebfluxExceptionResponseStatusBuilder.buildWebFluxExceptionResponse(

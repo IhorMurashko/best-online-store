@@ -19,6 +19,6 @@ public class DateConstructorUtil {
      * @return resulting expiration date
      */
     public static Date dateExpirationGenerator(Date from, long validityPeriodInSeconds) {
-        return new Date(from.getTime() + validityPeriodInSeconds);
+        return new Date(from.getTime() + validityPeriodInSeconds * 1000);
     }
 }
