@@ -1,7 +1,7 @@
 package com.common.lib.utils;
 
-import jakarta.inject.Named;
 import lombok.experimental.UtilityClass;
+import org.mapstruct.Named;
 
 
 import java.util.Arrays;

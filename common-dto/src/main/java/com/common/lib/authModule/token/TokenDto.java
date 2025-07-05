@@ -1,4 +1,13 @@
 package com.common.lib.authModule.token;
 
-public record TokenDto(String accessToken, String refreshToken) {
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.lang.NonNull;
+
+public record TokenDto(
+        @NonNull
+        @NotBlank
+        String accessToken,
+        @NonNull
+        @NotBlank
+        String refreshToken) {
 }
