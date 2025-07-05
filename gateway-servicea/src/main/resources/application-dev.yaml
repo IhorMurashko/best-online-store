@@ -1,0 +1,32 @@
+security-lib:
+  secret:
+    key:
+      internal: f8G7YxZ2KmL9QaP5RsDcVb3WNeJh4Tu1
+      jwt: XyR9LpD0VwgCTb35KqNZzHaFs1MJvOU2
+  black-list:
+    enabled: true
+
+spring:
+  docker:
+    compose:
+      enabled: true
+      lifecycle-management: start_and_stop
+      file: gateway-servicea/docker-compose.yaml
+  data:
+    redis:
+      port: 6379
+      host: localhost
+server:
+  port: 8080
+
+logging:
+  level:
+    root: DEBUG # всё приложение в режиме DEBUG
+    org.springframework: INFO # можно оставить INFO, иначе много шума
+    org.springframework.boot.autoconfigure: INFO # покажет, какие автоконфигурации включаются
+    org.springframework.cloud.gateway: DEBUG # логика Gateway
+    org.springframework.data.redis: DEBUG # Redis-соединения
+    io.lettuce.core: WARN # понижаем шум от клиента Redis (или DEBUG, если нужно)
+    com.bestStore: DEBUG # твой код
+    sun: info
+    javax.management: info
