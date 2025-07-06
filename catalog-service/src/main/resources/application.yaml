@@ -7,10 +7,10 @@ spring:
       ddl-auto: validate
     show-sql: true
   datasource:
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/catalog_service
+    username: ${DB_USERNAME}
+    url: ${DB_URL}
     driver-class-name: org.postgresql.Driver
-    password: postgres
+    password: ${DB_PASSWORD}
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.yaml
 springdoc:
